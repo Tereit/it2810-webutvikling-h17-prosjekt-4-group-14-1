@@ -1,0 +1,19 @@
+{
+  "name": "project_4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-4-group-14-1.git"
+  },
+  "author": "Henrik Bossart, Morten Mulvik, Silje Marie Tyrihjell, Camilla Tøftum Ranner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-4-group-14-1/issues"
+  },
+  "homepage": "https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-4-group-14-1#readme"
+}
