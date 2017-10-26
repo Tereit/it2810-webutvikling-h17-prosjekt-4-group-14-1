@@ -1,0 +1,52 @@
+{
+  "name": "project_4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "concurrently \"npm run tsc:w\" \"npm run lite\"",
+    "lite": "lite-server",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-4-group-14-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-4-group-14-1/issues"
+  },
+  "homepage": "https://github.com/IT2810/it2810-webutvikling-h17-prosjekt-4-group-14-1#readme",
+  "dependencies": {
+    "@angular/common": "^4.4.0-RC.0",
+    "@angular/compiler": "^4.4.0-RC.0",
+    "@angular/core": "^4.4.0-RC.0",
+    "@angular/forms": "^4.4.0-RC.0",
+    "@angular/http": "^4.4.0-RC.0",
+    "@angular/platform-browser": "^4.4.0-RC.0",
+    "@angular/platform-browser-dynamic": "^4.4.0-RC.0",
+    "@angular/router": "^4.4.0-RC.0",
+    "@angular/upgrade": "4.4.0-RC.0",
+    "body-parser": "^1.18.2",
+    "core-js": "^2.5.1",
+    "express": "^4.16.2",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.12.4",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.4.3",
+    "systemjs": "^0.20.18",
+    "zone.js": "^0.8.17"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@types/core-js": "^0.9.43",
+    "@types/jasmine": "^2.5.54",
+    "@types/node": "^8.0.26",
+    "concurrently": "^3.5.0",
+    "lite-server": "^2.3.0",
+    "morgan": "^1.9.0",
+    "typescript": "^2.5.2"
+  }
+}
