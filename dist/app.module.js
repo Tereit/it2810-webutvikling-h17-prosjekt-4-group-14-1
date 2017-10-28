@@ -10,7 +10,12 @@ var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
+var router_1 = require("@angular/router");
 var app_component_1 = require("./app.component");
+var about_component_1 = require("./about/about.component");
+var appRoutes = [
+    { path: 'about', component: about_component_1.AboutComponent }
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -18,11 +23,13 @@ var AppModule = /** @class */ (function () {
         core_1.NgModule({
             declarations: [
                 app_component_1.AppComponent,
+                about_component_1.AboutComponent,
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
-                http_1.HttpModule
+                http_1.HttpModule,
+                router_1.RouterModule.forRoot(appRoutes)
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]
