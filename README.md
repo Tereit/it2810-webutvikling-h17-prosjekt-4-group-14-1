@@ -24,6 +24,9 @@ At the core of the website is our search-function. It will be the first thing th
 #### Filters  
 Since the website searches for both artists and songs, the user will have the ability to filter the results for either aritsts, songs or both.  
 
+#### Sorting  
+We will implement sorting-functionality, where you can either sort by number of listeners or alphabetically by name. 
+
 ## Planned Design  
-The frontpage will consist of two elements; a search field and a view of pre made playlists. If the user clicks on one of the playlists, he/she will be redirected to a page containing the playlist.  
+The frontpage will consist of two elements; a search field and a view of pre-made playlists. If the user clicks on one of the playlists, he/she will be redirected to a page containing the playlist.  
 If the user decides to search for something, the results will appear underneath the search field. There will also be options to filter and sort the results.
