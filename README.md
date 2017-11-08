@@ -1,7 +1,5 @@
 # Project Description  
 
-***
-
 ## Introduction  
 
 In this project, we will be building a music-search-engine. It will search a local database for artists or songs, and if there are no results, it will search lastFM and store the results in our own database. By doing this, the user will help us build the database to contain queries that are frequently searched for.  
