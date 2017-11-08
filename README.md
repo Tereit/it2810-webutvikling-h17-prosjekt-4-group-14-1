@@ -22,7 +22,7 @@ Data for the database are artist and song objects. These will be gathered from l
 At the core of the website is our search-function. It will be the first thing the users encounter when they open our website. By using it, the user searches both our own database and lastFMs database.  
 
 #### Filters  
-Since the webiste searches for both artists and songs, the user will have the ability to filter the results for either aritsts, songs or both.  
+Since the website searches for both artists and songs, the user will have the ability to filter the results for either aritsts, songs or both.  
 
 ## Planned Design  
 The frontpage will consist of two elements; a search field and a view of pre made playlists. If the user clicks on one of the playlists, he/she will be redirected to a page containing the playlist.  
