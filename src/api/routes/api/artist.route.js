@@ -24,11 +24,12 @@ router.get('/:artist', function(req, res){
   });
 });
 
-router.post('/', function(req, res){
+router.post('/:artist', function(req, res){
+  console.log('in API: ', req);
   var newArtist = new Artist({
-    name: req.body.name,
-    mbid: req.body.mbid,
-    img:  req.body.img
+    name: req.name,
+    mbid: req.mbid,
+    img:  req.img
   });
 
   newArtist.save((e, newArtist) => {
