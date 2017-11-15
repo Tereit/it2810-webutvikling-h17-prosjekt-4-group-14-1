@@ -10,7 +10,7 @@
         position: relative;
     }
     #bildene{
-        margin-top: -1.5%;
+        padding-top: 2em;
         width: 100%;
         display: -webkit-flex; /* Safari */
         display: flex;

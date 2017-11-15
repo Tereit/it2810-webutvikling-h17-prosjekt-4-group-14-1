@@ -1,0 +1,15 @@
+.gridlist {
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.tile {
+  background: lightblue;
+  min-width: 200px;
+}
+
+.artistview {
+  margin-top: 200px;
+}

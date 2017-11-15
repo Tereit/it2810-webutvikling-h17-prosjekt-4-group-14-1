@@ -1,0 +1,7 @@
+
+<!-- Displaying search results as a grid list-->
+<div class="artistview" (window:resize)="onResize($event)">
+    <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
+      <mat-grid-tile class="tile" *ngFor="let artist of artists"> {{artist.name}}</mat-grid-tile>
+    </mat-grid-list>
+</div>
