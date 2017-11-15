@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100');
+
+img{
+    width: 30%;
+}
+.navbar{
+    color: white;
+}
+
+h1, p {
+    font-family: 'Lato', sans-serif;
+    color: white;
+    display: flex;
+}
+
+/*AppName on navbar*/
+.navbar-brand {
+    font-family: 'Lato', sans-serif;
+    color: white;
+    margin-right: 60%;
+}
+
+/*Link names on navbar*/
+#navbarCollapse {
+    font-family: 'Lato', sans-serif;
+    color: white;
+    font-size: 20px;
+}

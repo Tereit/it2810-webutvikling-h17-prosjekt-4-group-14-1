@@ -1,0 +1,22 @@
+.flex-cont{
+    flex-direction: column;
+}
+  
+/* Use this CSS when width <> 600px */
+@media all and (min-width: 600px){
+    img{
+        max-width: 100%;
+        float: left;
+        position: relative;
+    }
+    #bildene{
+        padding-top: 2em;
+        width: 100%;
+        display: -webkit-flex; /* Safari */
+        display: flex;
+    }
+    #bildene div{
+        width: 33.34%;
+        min-width: 200px;
+    }
+}

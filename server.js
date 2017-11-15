@@ -1,23 +1,28 @@
+var express = require('express');
+var path = require('path');
+var mongoose = require('mongoose');
+var bluebird = require('bluebird');
 
-// Importing dependencies and initializing express app
-let express = require('express');
-let app = express();
-let port = process.env.PORT || 8084;
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
-let bodyParser = require('body-parser');
-let morgan = require('morgan');
-let mongoose = require('mongoose');
-let methodOverride = require('method-override');
+var api = require('./src/api/routes/api.route');
 
-// app.use(express.static(__dirname + '/public'));
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({'extended' : 'true'}));
+const port = process.env.PORT || 8084;
+
+var app = express();
+mongoose.Promise = bluebird;
+mongoose.connect('mongodb://localhost/testbase', { useMongoClient: true})
+.then(()=> { console.log('Succesfully Connected to the Mongodb Database  at URL : mongodb://localhost/testbase')})
+.catch(()=> { console.log('Error Connecting to the Mongodb Database at URL : mongodb://localhost/testbase')});
+
+app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-app.get('/', function(req, res) {
-  res.sendfile('./index.html')
-});
+app.use('/api', api);
 
-app.listen(port)
+app.listen(port);
 console.log('Server running on port: ', port);
