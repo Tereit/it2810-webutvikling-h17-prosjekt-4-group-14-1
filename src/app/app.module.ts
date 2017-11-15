@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { ArtistComponent } from './artist/artist.component';
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
     MatIconModule,
     RouterModule.forRoot(appRoutes),
     MatDialogModule,
+    MatGridListModule,
   ],
   entryComponents: [
     ArtistComponent
