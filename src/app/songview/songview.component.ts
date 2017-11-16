@@ -11,7 +11,6 @@ export class SongViewComponent {
   constructor(private dialog: MatDialog) { }
   clickMe() {
     const dialogRef = this.dialog.open(ArtistViewComponent, {
-      height: '350px'
     });
 
     /*dialogRef.afterClosed().subscribe(result => {

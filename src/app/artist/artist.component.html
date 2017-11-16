@@ -1,9 +1,11 @@
-<mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true" tabindex="1"><i class="material-icons">close</i></button>
-  <button mat-button mat-dialog-close tabindex="-1"><i class="material-icons">keyboard_arrow_left</i></button>
-</mat-dialog-actions>
-<h2 mat-dialog-title>Artist information:</h2>
-<mat-dialog-content>
-  <p>Name: {{artist.name}}</p>
-  <p>ID: {{artist.mbid}}</p>
-</mat-dialog-content>
+<div id="flex-cont">
+  <div class="knapp">
+      <button mat-button [mat-dialog-close]="true" tabindex="1" id="close"><i class="material-icons">close</i></button>
+      <!--<button mat-button mat-dialog-close tabindex="-1"><i class="material-icons">keyboard_arrow_left</i></button>-->
+  </div>
+  <div class="flex-item">
+      <img src="../../assets/images/album-Alicia-Keys-As-I-Am_thumb.jpg">
+      <h2 mat-dialog-title>{{artist.name}}</h2>
+      <p>ID: {{artist.mbid}}</p>
+  </div>
+</div>
