@@ -1,7 +1,16 @@
 
-<!-- Displaying search results as a grid list-->
+<!-- Displaying search results as a grid list with infinite scroll-->
 <div class="artistview" (window:resize)="onResize($event)">
     <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
-      <mat-grid-tile class="tile" *ngFor="let artist of artists"> {{artist.name}}</mat-grid-tile>
+      <mat-grid-tile class="tile" *ngFor="let artist of artists | slice:0:limit">
+        <div class="infinitescrollDiv"
+        infiniteScroll
+        [infiniteScrollDistance]="scrollDistance"
+        [infiniteScrollThrottle]="850"
+        (scrolled)="limit=limit+1"
+        (scrolled)="onScroll()">
+        <div class="artistcontent">{{artist.name}}</div>
+      </div>
+      </mat-grid-tile>
     </mat-grid-list>
 </div>

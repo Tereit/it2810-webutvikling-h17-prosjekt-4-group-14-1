@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
+    InfiniteScrollModule,
     MatGridListModule,
     MatMenuModule,
     MatIconModule,
