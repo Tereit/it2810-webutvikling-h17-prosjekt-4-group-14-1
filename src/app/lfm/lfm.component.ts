@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-    selector: 'lastFM-api',
+    selector: 'app-lastfm-api',
     templateUrl: './lastFM.component.html'
 })
 
@@ -10,8 +10,8 @@ export class LastFMComponent implements OnInit {
     values = '';
     artistSearchResult: Object = [];
     songSearchResult: Object = [];
-    getSongs: boolean = true;
-    getArtists: boolean = true;
+    getSongs: true;
+    getArtists: true;
     constructor(private http: HttpClient) {}
 
     onKey(event: any) {
