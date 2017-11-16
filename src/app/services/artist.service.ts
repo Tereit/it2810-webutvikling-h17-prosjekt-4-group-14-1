@@ -14,19 +14,19 @@ export class ArtistService {
 
   constructor(private http: HttpClient) { }
 
-  getAllArtists(): Observable<Artist[]>{
+  getAllArtists(): Observable<Artist[]> {
     return this.http.get(this.artist_url).map(res => {
       return res as Artist[];
     });
   }
 
-  getArtist(name: string): Observable<Artist[]>{
+  getArtist(name: string): Observable<Artist[]> {
     return this.http.get(this.artist_url + name).map(res => {
       return res as Artist[];
     });
   }
 
-  createArtist(artist: Artist): Observable<any>{
+  createArtist(artist: Artist): Observable<any> {
     console.log('In service: ', artist);
     console.log(`${this.artist_url}`, artist);
     return this.http.post(`${this.artist_url}`, artist).map(res => {
