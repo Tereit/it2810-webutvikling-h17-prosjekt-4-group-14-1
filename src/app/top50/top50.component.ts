@@ -12,21 +12,24 @@ import {MatGridListModule} from '@angular/material/grid-list';
 })
 
 export class Top50Component implements OnInit {
-  column: any = 5;
+    column: any = 5;
 
-  artists = [
-  new Artist(1, 'Element111'),
-  new Artist(2, 'Element112'),
-  new Artist(3, 'Element321'),
-  new Artist(4, 'Element441'),
-  new Artist(5, 'Element442'),
-  new Artist(6, 'Element3211'),
-  new Artist(7, 'Element4715'),
-];
+    artists = [
+        new Artist(1, 'Element111'),
+        new Artist(2, 'Element112'),
+        new Artist(3, 'Element321'),
+        new Artist(4, 'Element441'),
+        new Artist(5, 'Element442'),
+        new Artist(6, 'Element3211'),
+        new Artist(7, 'Element4715'),
+    ];
 
     country: string;
     constructor(private route: ActivatedRoute, private router: Router) { }
 
+    onresize(event) {
+        // do nothing
+    }
     ngOnInit() {
         this.country = this.route.snapshot.paramMap.get('country');
     }

@@ -11,7 +11,7 @@ export class ArtistViewComponent {
   @Input() artist: any;
   artistDialogRef: MatDialogRef<ArtistComponent>;
   constructor(private dialog: MatDialog) { }
-  clickMe(tall){
-    this.artistDialogRef = this.dialog.open(ArtistComponent, {artist: this.artist});
+  clickMe(tall) {
+    this.artistDialogRef = this.dialog.open(ArtistComponent, {data: this.artist});
   }
 }

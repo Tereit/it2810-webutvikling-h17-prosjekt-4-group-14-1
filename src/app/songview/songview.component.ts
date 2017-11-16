@@ -9,13 +9,13 @@ import {MatDialog} from '@angular/material';
 })
 export class SongViewComponent {
   constructor(private dialog: MatDialog) { }
-  clickMe(){
+  clickMe() {
     const dialogRef = this.dialog.open(ArtistViewComponent, {
       height: '350px'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    /*dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-    });
+    });*/
   }
 }
