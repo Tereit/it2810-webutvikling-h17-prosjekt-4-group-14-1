@@ -29,7 +29,7 @@ export class ArtistService {
   createArtist(artist: Artist): Observable<any>{
     console.log('In service: ', artist);
     console.log(`${this.artist_url}`, artist);
-    return this.http.post(`${this.artist_url}`+ artist).map(res => {
+    return this.http.post(`${this.artist_url}`, artist).map(res => {
       return res;
     });
   }

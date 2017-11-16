@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var Artist = require('../../models/artist.model');
 var mongoose = require('mongoose');
+var LastfmAPI = require('lastfmapi');
+var api_key = '034f5f35cd2966737626588df7d6cf2b'
+var lfm = new LastfmAPI({
+    'api_key': api_key,
+    'secret': 'b97fab5e109145a48bbd6566346feaf7'
+});
 
 router.get('/', function(req, res){
   Artist.find({}, function(err, artists){
@@ -20,9 +26,70 @@ router.get('/:artist', function(req, res){
     artists.forEach(function(artist){
       artistMap[artist._id] = artist;
     });
+    console.log(artistMap);
+
+    if (Object.keys(artistMap).length === 0) {
+      console.log('Nothing found in local DB, searching LFM');
+      var param = {
+        'artist': name,
+        'api_key': api_key
+      }
+      var test = lfm.artist.search(param, function(err, response){
+        if (err) {
+          console.log(err);
+          return null;
+        }
+        var data = response.artistmatches.artist;
+        var results = [];
+        for(var i = 0; i < data.length; i++) {
+                if(data[i].mbid.length <= 0) continue;
+                if(data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
+                result = {
+                    'name': data[i].name,
+                    'mbid': data[i].mbid,
+                    'img': data[i].image[1]['#text']
+                }
+                results.push(result);
+                var tempArtist = new Artist({
+                  name: result.name,
+                  mbid: result.mbid,
+                  img: result.img
+                });
+                tempArtist.save();
+            }
+            // console.log(results);
+            return results;
+        });
+        console.log(test);
+    } else {
+      console.log('ADFADFAFAF');
+    }
+
     res.send(artistMap);
   });
 });
+
+// lfm.artist.search(param, function(err, res) {
+//     if(err) {
+//         console.log(err);
+//         return null;
+//     }
+//     var data = res.artistmatches.artist;
+//     var results = [];
+//     for(var i = 0; i < data.length; i++) {
+//         if(data[i].mbid.length <= 0) continue;
+//         if(data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
+//         result = {
+//             'name': data[i].name,
+//             'mbid': data[i].mbid,
+//             'img': data[i].image[1]['#text']
+//         }
+//         results.push(result);
+//     }
+//     response.send(results);
+// });
+// }
+
 
 router.post('/:artist', function(req, res){
   console.log('in API: ', req);

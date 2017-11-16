@@ -27,20 +27,16 @@ export class TestComponent implements OnInit {
     // this.getTop50();
     // this.retreiveArtists('metallica');
     // this.artistSearch('test');
-    var helloArtist = new Artist();
-    helloArtist.name = 'hello';
-    helloArtist.mbid = 'head';
-    helloArtist.img = 'adfdaf';
 
+    this.getArtist('test');
     this.artistSearch('metallica');
-    this.createArtist(helloArtist)
 
   }
 
   getAllArtists() {
     this.artistService.getAllArtists().subscribe(artists => {
       this.artistList = artists;
-      console.log('Artists: ', this.artistList);
+      // console.log('Artists: ', this.artistList);
     });
   }
 
@@ -73,21 +69,24 @@ export class TestComponent implements OnInit {
   }
 
   artistSearch(name: string) {
+    let tempResult: Object = [];
     this.artistService.getArtist(name).subscribe(artist => {
-      if (Object.keys(artist).length === 0) {
+      if(Object.keys(artist).length === 0){
         this.http.get('http://localhost:8084/api/lfm/artist/' + name)
-          .subscribe(data => {
-            for (var x in data) {
-              let tempArtist = new Artist();
-              tempArtist.name = data[x].name;
-              tempArtist.mbid = data[x].mbid;
-              tempArtist.img = data[x].img;
-              this.createArtist(tempArtist);
-            }
+        .subscribe(data => {
+          tempResult = data;
+          for (let key in tempResult) {
+            console.log(tempResult[key].name);
+            let tempArtist = new Artist();
+            tempArtist.name = tempResult[key].name;
+            tempArtist.mbid = tempResult[key].mbid;
+            tempArtist.img = tempResult[key].img;
+            this.createArtist(tempArtist);
           }
+        });
       } else {
-        console.log('had some content!', artist);
+        console.log('No content!!');
       }
-    }
-}
+    });
+  }
 }
