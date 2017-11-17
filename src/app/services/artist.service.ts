@@ -1,5 +1,5 @@
 import Artist from '../models/artist.model';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/observable';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';

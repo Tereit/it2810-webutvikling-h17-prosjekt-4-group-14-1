@@ -1,9 +1,8 @@
 <div class="songData">
     <h3>{{country}} Top 50</h3>
-    <!--
-    <li *ngFor = "let item of songSearchResult">
-        <songs [data] = item> </songs>
-    </li>
-    -->
+    <div class="artistview" (window:resize)="onResize($event)">
+        <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
+          <mat-grid-tile class="tile" *ngFor="let artist of artists | IterableDictPipe"> <app-artistview [artist]=artist.value></app-artistview></mat-grid-tile>
+        </mat-grid-list>
+    </div>
 </div>
-  

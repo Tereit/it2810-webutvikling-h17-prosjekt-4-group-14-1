@@ -55,7 +55,7 @@ router.get('/:artist', function(req, res){
                   mbid: result.mbid,
                   img: result.img
                 });
-                tempArtist.save();
+                // tempArtist.save();
             }
             console.log('results: ', results);
             res.send(results);
@@ -93,9 +93,9 @@ router.get('/:artist', function(req, res){
 router.post('/:artist', function(req, res){
   console.log('in API: ', req);
   var newArtist = new Artist({
-    name: req.name,
-    mbid: req.mbid,
-    img:  req.img
+    name: req.body.name,
+    mbid: req.body.mbid,
+    img:  req.body.img
   });
 
   newArtist.save((e, newArtist) => {

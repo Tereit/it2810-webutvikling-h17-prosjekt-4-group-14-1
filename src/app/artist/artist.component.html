@@ -1,0 +1,12 @@
+<div id="flex-cont">
+  <div class="knapp">
+      <button mat-button [mat-dialog-close]="true" tabindex="1" id="close"><i class="material-icons">close</i></button>
+      <!--<button mat-button mat-dialog-close tabindex="-1"><i class="material-icons">keyboard_arrow_left</i></button>-->
+  </div>
+  <div class="flex-item">
+      <img src={{artist.img}}>
+      <h2 mat-dialog-title>{{artist.name}}</h2>
+      <p>ID: {{artist.mbid}}</p>
+      <p>imgURL: {{artist.img}}</p>
+  </div>
+</div>

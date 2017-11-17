@@ -1,0 +1,46 @@
+/*@import '../../../node_modules/@angular/cdk/a11y-prebuilt.css';*/
+
+#flex-cont{
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin-top: -1.25em;
+  margin-right: -1.25em;
+  /*background-color: #5e0303;*/
+  height: 350px;
+}
+
+.knapp{
+  align-self:flex-end;
+}
+
+button:focus{
+  outline: 0 !important;
+}
+
+.flex-item{
+  align-self: center;
+  width: 100%;
+  margin-top: 1.25em;
+  margin-right: 1.25em;
+  text-align: center;
+
+}
+
+img{
+  border-radius: 50%;
+  width: 40%;
+  margin-top: -2em;
+  margin-bottom: 0.8em;
+}
+
+#close{
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: 0px;
+
+}
+i:hover{
+  color: pink;
+}
