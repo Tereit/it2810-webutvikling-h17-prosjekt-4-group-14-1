@@ -4,10 +4,10 @@ class Artist {
   mbid: string;
   img: string;
 
-  constructor(){
-    this.name = "";
-    this.mbid = "";
-    this.img  = "";
+  constructor() {
+    this.name = '';
+    this.mbid = '';
+    this.img  = '';
   }
 
 }
