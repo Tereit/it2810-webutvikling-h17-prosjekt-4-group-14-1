@@ -37,6 +37,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     SearchComponent,
     SongViewComponent,
+    TestComponent,
     Top50Component
   ],
   imports: [
