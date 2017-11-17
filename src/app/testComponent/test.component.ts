@@ -39,7 +39,7 @@ export class TestComponent implements OnInit {
   getArtist(name: string) {
     this.artistService.getArtist(name).subscribe(artist => {
       this.artistList2 = artist;
-      // console.log(this.artistList2);
+      console.log(artist);
     });
   }
 

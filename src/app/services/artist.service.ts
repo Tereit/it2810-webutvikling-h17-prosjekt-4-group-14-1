@@ -30,7 +30,7 @@ export class ArtistService {
     console.log('In service: ', artist);
     console.log(`${this.artist_url}`, artist);
     return this.http.post(`${this.artist_url}`, artist).map(res => {
-      return res;
+      return res as Artist[];
     });
   }
 }
