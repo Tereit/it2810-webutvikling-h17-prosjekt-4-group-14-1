@@ -22,6 +22,9 @@ import { Top50Component } from './top50/top50.component';
 // services
 import { ArtistService } from './services/artist.service';
 
+// pipes
+import { IterableDictPipe } from './pipes/iterableDictPipe';
+
 const appRoutes: Routes = [
   {path: '', component: FrontpageComponent},
   {path: 'top50/:country', component: Top50Component},
@@ -34,6 +37,7 @@ const appRoutes: Routes = [
     ArtistComponent,
     ArtistViewComponent,
     FrontpageComponent,
+    IterableDictPipe,
     NavbarComponent,
     SearchComponent,
     SongViewComponent,
