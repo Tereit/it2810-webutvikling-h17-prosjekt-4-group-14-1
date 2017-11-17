@@ -26,7 +26,7 @@ router.get('/:artist', function(req, res){
     artists.forEach(function(artist){
       artistMap[artist._id] = artist;
     });
-    console.log(artistMap);
+    console.log('ArtistMap: ', artistMap);
 
     if (Object.keys(artistMap).length === 0) {
       console.log('Nothing found in local DB, searching LFM');
@@ -55,7 +55,7 @@ router.get('/:artist', function(req, res){
                   mbid: result.mbid,
                   img: result.img
                 });
-                tempArtist.save();
+                // tempArtist.save();
             }
             // console.log(results);
             return results;

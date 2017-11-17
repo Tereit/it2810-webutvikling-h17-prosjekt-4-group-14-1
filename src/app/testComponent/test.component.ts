@@ -29,7 +29,7 @@ export class TestComponent implements OnInit {
     // this.artistSearch('test');
 
     this.getArtist('test');
-    this.artistSearch('metallica');
+    this.artistSearch('Metallica');
 
   }
 
