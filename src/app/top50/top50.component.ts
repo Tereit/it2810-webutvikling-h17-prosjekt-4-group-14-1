@@ -23,7 +23,7 @@ export class Top50Component implements OnInit {
     getArtists() {
         this.artistService.getAllArtists()
         .subscribe(data => {
-            console.log(data);
+            this.artists = data;
         });
     }
 
