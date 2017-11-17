@@ -10,7 +10,7 @@ import { trigger,state,style,transition,animate,keyframes } from '@angular/anima
     templateUrl: './artistview.component.html',
     styleUrls: ['./artistview.component.css'],
     animations: [
-      trigger('myAwesomeAnimation', [
+      trigger('Animation', [
         state('small', style({
           transform: 'scale(1)',
         })),
@@ -84,7 +84,7 @@ constructor(){
 }
 
 animateMe() {
-        this.state = (this.state === 'small' ? 'large' : 'small');
+        this.state = ('small');
   }
 
 //Adds one element at a time to the displayedElements list until there are no more
@@ -101,11 +101,10 @@ addItems(){
 
 //Runs each time you scroll
 onScroll() {
-    console.log('Scrolled!')
+    //Detects when you reach the bottom, and then adds 5 more results.
     if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+      this.limit=this.limit+5
       this.addItems();
-      console.log("Bottom");
-    // you're at the bottom of the page
   }
 }
 
