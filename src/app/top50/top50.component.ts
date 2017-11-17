@@ -2,8 +2,9 @@ import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import {Artist} from './artist';
+import {Artist} from '../models/artist.model';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {ArtistService} from '../services/artist.service';
 
 @Component({
     selector: 'app-top50',
@@ -14,23 +15,23 @@ import {MatGridListModule} from '@angular/material/grid-list';
 export class Top50Component implements OnInit {
     column: any = 5;
 
-    artists = [
-        new Artist(1, 'Element111'),
-        new Artist(2, 'Element112'),
-        new Artist(3, 'Element321'),
-        new Artist(4, 'Element441'),
-        new Artist(5, 'Element442'),
-        new Artist(6, 'Element3211'),
-        new Artist(7, 'Element4715'),
-    ];
+    artists: Artist[] = [];
 
     country: string;
-    constructor(private route: ActivatedRoute, private router: Router) { }
+    constructor(private route: ActivatedRoute, private router: Router, private artistService: ArtistService) { }
+
+    getArtists() {
+        this.artistService.getAllArtists()
+        .subscribe(data => {
+            console.log(data);
+        });
+    }
 
     onresize(event) {
         // do nothing
     }
     ngOnInit() {
         this.country = this.route.snapshot.paramMap.get('country');
+        this.getArtists();
     }
 }

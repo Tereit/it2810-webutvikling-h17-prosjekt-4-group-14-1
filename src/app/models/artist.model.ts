@@ -1,4 +1,4 @@
-class Artist {
+export class Artist {
   _id: string;
   name: string;
   mbid: string;
