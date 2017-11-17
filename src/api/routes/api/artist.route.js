@@ -21,7 +21,7 @@ router.get('/', function(req, res){
 
 router.get('/:artist', function(req, res){
   let name = req.params.artist;
-  Artist.find({name: name}, function(err, artists){
+  Artist.find({name: new RegExp('^'+name+'$', "i")}, function(err, artists){
     var artistMap = {};
     artists.forEach(function(artist){
       artistMap[artist._id] = artist;
@@ -29,12 +29,12 @@ router.get('/:artist', function(req, res){
     console.log('ArtistMap: ', artistMap);
 
     if (Object.keys(artistMap).length === 0) {
-      console.log('Nothing found in local DB, searching LFM');
+      console.log('Nothing found in local DB, searching LFM...');
       var param = {
         'artist': name,
         'api_key': api_key
       }
-      var test = lfm.artist.search(param, function(err, response){
+      lfm.artist.search(param, function(err, response){
         if (err) {
           console.log(err);
           return null;
@@ -55,17 +55,16 @@ router.get('/:artist', function(req, res){
                   mbid: result.mbid,
                   img: result.img
                 });
-                // tempArtist.save();
+                tempArtist.save();
             }
-            // console.log(results);
-            return results;
+            console.log('results: ', results);
+            res.send(results);
         });
-        console.log(test);
     } else {
-      console.log('ADFADFAFAF');
+      console.log('Found data in local DB');
+      res.send(artistMap);
     }
 
-    res.send(artistMap);
   });
 });
 

@@ -22,14 +22,7 @@ export class TestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.getAllArtists();
-    // this.createArtist();
-    // this.getTop50();
-    // this.retreiveArtists('metallica');
-    // this.artistSearch('test');
-
-    this.getArtist('test');
-    this.artistSearch('Metallica');
+    this.getArtist('Rolling Stones');
 
   }
 
@@ -41,9 +34,9 @@ export class TestComponent implements OnInit {
   }
 
   getArtist(name: string) {
-    this.artistService.getArtist('test4').subscribe(artist => {
+    this.artistService.getArtist(name).subscribe(artist => {
       this.artistList2 = artist;
-      // console.log(this.artistList2);
+      console.log(artist);
     });
   }
 
@@ -66,27 +59,5 @@ export class TestComponent implements OnInit {
         this.artistSearchResult = data;
         console.log(this.artistSearchResult);
       });
-  }
-
-  artistSearch(name: string) {
-    let tempResult: Object = [];
-    this.artistService.getArtist(name).subscribe(artist => {
-      if(Object.keys(artist).length === 0){
-        this.http.get('http://localhost:8084/api/lfm/artist/' + name)
-        .subscribe(data => {
-          tempResult = data;
-          for (let key in tempResult) {
-            console.log(tempResult[key].name);
-            let tempArtist = new Artist();
-            tempArtist.name = tempResult[key].name;
-            tempArtist.mbid = tempResult[key].mbid;
-            tempArtist.img = tempResult[key].img;
-            this.createArtist(tempArtist);
-          }
-        });
-      } else {
-        console.log('No content!!');
-      }
-    });
   }
 }
