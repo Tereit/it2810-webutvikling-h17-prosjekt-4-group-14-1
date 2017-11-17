@@ -22,17 +22,11 @@ export class TestComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.getAllArtists();
-    // this.createArtist();
-    // this.getTop50();
-    // this.retreiveArtists('metallica');
-    // this.artistSearch('test');
-
-    this.getArtist('test');
-    this.artistSearch('metallica');
+    this.getArtist('Metallica');
 
   }
-
+  
+  //Returns all artists in the database
   getAllArtists() {
     this.artistService.getAllArtists().subscribe(artists => {
       this.artistList = artists;
@@ -40,53 +34,37 @@ export class TestComponent implements OnInit {
     });
   }
 
+  // Gets an artist from local DB or from lastFM.
+  // Takes the name of the artist as a parameter
   getArtist(name: string) {
-    this.artistService.getArtist('test4').subscribe(artist => {
+    this.artistService.getArtist(name).subscribe(artist => {
       this.artistList2 = artist;
       // console.log(this.artistList2);
     });
   }
 
+  // Creates an artist and stores it in the database, then gets all artists.
+  // Takes in the artist as a parameter
   createArtist(artist: Artist) {
     this.artistService.createArtist(artist);
-    this.getAllArtists();
+    // this.getAllArtists();
   }
 
-  getTop50() {
-    this.http.get('http://localhost:8084/api/lfm/getTop50/norway')
+  // To get top 50 from lastFM, takes country as parameter
+  getTop50(country: string) {
+    this.http.get('http://localhost:8084/api/lfm/getTop50/' + country)
       .subscribe(data => {
         this.songSearchResult = data;
         console.log(this.songSearchResult);
       });
   }
 
+  // For retrieving artists from lastFM, probably not needed.
   retreiveArtists(name: string) {
     this.http.get('http://localhost:8084/api/lfm/artist/' + name)
       .subscribe(data => {
         this.artistSearchResult = data;
         console.log(this.artistSearchResult);
       });
-  }
-
-  artistSearch(name: string) {
-    let tempResult: Object = [];
-    this.artistService.getArtist(name).subscribe(artist => {
-      if (Object.keys(artist).length === 0) {
-        this.http.get('http://localhost:8084/api/lfm/artist/' + name)
-        .subscribe(data => {
-          tempResult = data;
-          for (let key in tempResult) {
-            console.log(tempResult[key].name);
-            let tempArtist = new Artist();
-            tempArtist.name = tempResult[key].name;
-            tempArtist.mbid = tempResult[key].mbid;
-            tempArtist.img = tempResult[key].img;
-            this.createArtist(tempArtist);
-          }
-        });
-      } else {
-        console.log('No content!!');
-      }
-    });
   }
 }

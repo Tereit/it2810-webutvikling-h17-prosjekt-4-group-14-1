@@ -55,7 +55,7 @@ router.get('/:artist', function(req, res){
                   mbid: result.mbid,
                   img: result.img
                 });
-                tempArtist.save();
+                // tempArtist.save();
             }
             // console.log(results);
             return results;
