@@ -57,9 +57,9 @@
   align-items: flex-start;
 }
 
-.tile {
-  background: lightblue;
-  min-width: 200px;
+.mat-grid-tile {
+  width: 100%;
+  color: black;
 }
 
 .artistview {

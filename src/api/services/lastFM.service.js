@@ -23,8 +23,9 @@ exports.getArtist = function(request, response) {
             result = {
                 'name': data[i].name,
                 'mbid': data[i].mbid,
-                'img': data[i].image[2]['#text']
+                'img': data[i].image[3]['#text']
             }
+            console.log(data[i].image);
             results.push(result);
         }
         response.send(results);

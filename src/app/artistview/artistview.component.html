@@ -1,4 +1,3 @@
-<div (click) = "clickMe()" *ngIf="artist !== null">
-    <img src={{artist.img}}>
-    <p >{{artist.name}}</p>
+<div *ngIf="artist !== null">
+    <img src={{artist.img}} (click) = "clickMe()">
 </div>

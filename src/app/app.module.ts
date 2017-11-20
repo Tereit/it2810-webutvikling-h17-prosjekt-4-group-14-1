@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
 
 
 // components
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
+    MatCardModule,
     MatDialogModule,
     MatGridListModule,
     MatIconModule,
