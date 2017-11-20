@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ArtistService } from '../services/artist.service';
 import { Artist } from '../models/artist.model';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { trigger,state,style,transition,animate,keyframes } from '@angular/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 @Component({
     selector: 'app-search',
@@ -26,14 +26,14 @@ export class SearchComponent implements OnInit {
     value = '';
     artistSearchResult: Artist[] = [];
 
-    state: string = 'small'; 
-    //Assigning how many elements that should be displayed in a row
+    state: 'small';
+    // Assigning how many elements that should be displayed in a row
     column: any = 5;
-    //List for displaying items in elements
+    // List for displaying items in elements
     displayedElements: Artist[] = [];
-    //Defines how many elements that should be displayed at a time
-    limit=5
-    constructor(private artistService: ArtistService) { 
+    // Defines how many elements that should be displayed at a time
+    limit = 5;
+    constructor(private artistService: ArtistService) {
         // this.addItems();
         // this.animateMe();
     }
@@ -46,55 +46,48 @@ export class SearchComponent implements OnInit {
     onKey(event: any) {
         this.value = event.target.value;
     }
-    
+
     animateMe() {
         this.state = ('small');
     }
-    addItems(){
-        for (let i = 0; i < this.artistSearchResult.length; i++){
-            if (this.artistSearchResult.length != this.displayedElements.length){
+    addItems() {
+        for (let i = 0; i < this.artistSearchResult.length; i++) {
+            if (this.artistSearchResult.length !== this.displayedElements.length) {
                 this.displayedElements.push(this.artistSearchResult[i]);
                 console.log(this.displayedElements);
                 this.animateMe();
             }
         }
     }
-    //Runs each time you scroll
+    // Runs each time you scroll
     onScroll() {
-        //Detects when you reach the bottom, and then adds 5 more results.
+        // Detects when you reach the bottom, and then adds 5 more results.
         if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-            this.limit=this.limit+5
+            this.limit = this.limit + 5;
             this.addItems();
         }
     }
-    
-    
-    //Making grid list responsive
+    // Making grid list responsive
     onResize(event) {
         const element = event.target.innerWidth;
         console.log(element);
-    
         if (element > 1050) {
             this.column = 5;
         }
-    
         if (element > 950 && element < 1050) {
             this.column = 4;
         }
-    
         if (element < 850) {
             this.column = 3;
         }
-    
         if (element < 750) {
             this.column = 2;
         }
-    
         if (element < 650) {
             this.column = 1;
         }
     }
-    ngOnInit() { 
+    ngOnInit() {
         this.addItems();
         this.animateMe();
     }

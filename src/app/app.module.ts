@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,7 +43,8 @@ const appRoutes: Routes = [
     SongViewComponent,
     TestComponent,
     ArtistViewComponent,
-    Top50Component
+    Top50Component,
+    ArtistComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     MatIconModule,
     MatMenuModule,
     RouterModule.forRoot(appRoutes),
+    InfiniteScrollModule
   ],
   entryComponents: [
     ArtistComponent
