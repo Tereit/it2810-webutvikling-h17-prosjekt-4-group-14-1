@@ -41,6 +41,19 @@ export class SearchComponent implements OnInit {
         });
     }
 
+    sortBy() {
+        this.artistSearchResult.sort((n1, n2): number => {
+            if (n1.name > n2.name) {
+                return 1;
+            }
+            if (n1.name < n2.name) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+    }
+
     onKey(event: any) {
         if (event.keyCode === 13) {
             this.getArtist();
