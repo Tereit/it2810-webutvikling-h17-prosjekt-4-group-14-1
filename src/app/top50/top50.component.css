@@ -9,11 +9,12 @@ li{
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 2em;
 }
 h3 {
     padding-top: 2em;
 }
-*/
+
 .gridlist {
   display: flex;
   -webkit-flex-wrap: wrap;
@@ -27,5 +28,5 @@ h3 {
 }
 
 .artistview {
-  padding-top: 2em;
+  padding-top: 5em;
 }

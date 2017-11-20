@@ -22,10 +22,13 @@ export class Top50Component implements OnInit {
 
     getArtists() {
         this.artistService.getAllArtists()
-        .subscribe(data => this.artists = data);
+        .subscribe(data => {
+            this.artists = data;
+            console.log(this.artists);
+        });
     }
 
-    onresize(event) {
+    onResize(event) {
         // do nothing
     }
     ngOnInit() {

@@ -10,9 +10,9 @@ import { Artist } from '../models/artist.model';
 })
 
 export class ArtistViewComponent {
-  @Input() artist: Artist;
+  @Input() artist: Artist = null;
   artistDialogRef: MatDialogRef<ArtistComponent>;
-  
+
   constructor(private dialog: MatDialog) {}
   clickMe() {
     this.artistDialogRef = this.dialog.open(ArtistComponent, {data: this.artist});

@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
     getArtist(): void {
         this.artistService.getArtist(this.value).subscribe(data => {
             this.artistSearchResult = data;
-            console.log(this.artistSearchResult);
+            // console.log(this.artistSearchResult);
         });
     }
 
@@ -54,11 +54,9 @@ export class SearchComponent implements OnInit {
         this.state = ('small');
     }
     addItems() {
-        console.log(this.artistSearchResult);
         for (let i = 0; i < this.artistSearchResult.length; i++) {
             if (this.artistSearchResult.length !== this.displayedElements.length) {
                 this.displayedElements.push(this.artistSearchResult[i]);
-                // console.log(this.displayedElements);
                 this.animateMe();
             }
         }
