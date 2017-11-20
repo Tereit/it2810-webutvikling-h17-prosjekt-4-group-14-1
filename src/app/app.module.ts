@@ -23,9 +23,11 @@ import { ArtistComponent } from './artist/artist.component';
 
 // services
 import { ArtistService } from './services/artist.service';
+import { SongService } from './services/song.service';
 
 // pipes
 import { IterableDictPipe } from './pipes/iterableDictPipe';
+import { SongComponent } from './song/song.component';
 
 const appRoutes: Routes = [
   {path: '', component: FrontpageComponent},
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
     SongViewComponent,
     ArtistViewComponent,
     Top50Component,
-    ArtistComponent
+    ArtistComponent,
+    SongComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -58,9 +61,10 @@ const appRoutes: Routes = [
     InfiniteScrollModule
   ],
   entryComponents: [
-    ArtistComponent
+    ArtistComponent,
+    SongComponent
   ],
-  providers: [ArtistService],
+  providers: [ArtistService, SongService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
