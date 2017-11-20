@@ -47,6 +47,10 @@ export class SearchComponent implements OnInit {
     }
 
     onKey(event: any) {
+        if (event.keyCode === 13) {
+            this.getArtist();
+            return;
+        }
         this.value = event.target.value;
     }
 
