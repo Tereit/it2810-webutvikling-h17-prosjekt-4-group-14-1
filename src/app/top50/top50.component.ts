@@ -16,7 +16,7 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
             state('small', style({
                 transform: 'scale(1)',
             })),
-            transition('* <=> *', animate('1000ms ease-in', keyframes([
+            transition('* <=> *', animate('400ms ease-in', keyframes([
                 style({opacity: 0, transform: 'translateY(0%)', offset: 0}),
                 style({opacity: 0.5, transform: 'translateY(0px)',  offset: 0.5}),
                 style({opacity: 1, transform: 'translateY(0)',     offset: 1.0})
