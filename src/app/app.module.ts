@@ -17,7 +17,6 @@ import { ArtistViewComponent } from './artistview/artistview.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SearchComponent } from './search/search.component';
 import { SongViewComponent } from './songview/songview.component';
-import { TestComponent } from './testComponent/test.component';
 import { Top50Component } from './top50/top50.component';
 import { ArtistComponent } from './artist/artist.component';
 
@@ -30,7 +29,7 @@ import { IterableDictPipe } from './pipes/iterableDictPipe';
 const appRoutes: Routes = [
   {path: '', component: FrontpageComponent},
   {path: 'top50/:country', component: Top50Component},
-  {path: 'test', component: TestComponent}
+  {path: 'search', component: SearchComponent}
 ];
 
 @NgModule({
@@ -41,7 +40,6 @@ const appRoutes: Routes = [
     NavbarComponent,
     SearchComponent,
     SongViewComponent,
-    TestComponent,
     ArtistViewComponent,
     Top50Component,
     ArtistComponent

@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-/*
+/*Search bar */
 .search {
     width: 100%;
     position: relative;
@@ -13,11 +13,11 @@
     float: left;
     width: 100%;
     border: 3px solid #5E0303;
-    padding: 15px;
-    height: 20px;
+    padding-left: 5px;
+    height: 36px;
     border-radius: 5px;
     outline: none;
-    color: #9DBFAF;
+    color: #404040;
 }
 
 .searchTerm:focus{
@@ -40,10 +40,32 @@
 
 .material-icons{
     padding: 2px;
-}*/
+}
 
 .wrap{
+    padding-top: 3.89em;
     width: 30%;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Search results */
+.gridlist {
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.tile {
+  background: lightblue;
+  min-width: 200px;
+}
+
+.artistview {
+  margin-top: 2em;
+}
+
+.infinitescrollDiv {
+
 }
