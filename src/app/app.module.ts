@@ -1,23 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
+import {MatGridListModule} from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material';
-import { MatGridListModule } from '@angular/material/grid-list';
+
 
 // components
 import { AppComponent } from './app.component';
-import { ArtistComponent } from './artist/artist.component';
-import { ArtistViewComponent } from './artistview/artistview.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
+import { ArtistViewComponent } from './artistview/artistview.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SearchComponent } from './search/search.component';
 import { SongViewComponent } from './songview/songview.component';
 import { TestComponent } from './testComponent/test.component';
 import { Top50Component } from './top50/top50.component';
+import { ArtistComponent } from './artist/artist.component';
 
 // services
 import { ArtistService } from './services/artist.service';
@@ -34,14 +36,13 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ArtistComponent,
-    ArtistViewComponent,
     FrontpageComponent,
     IterableDictPipe,
     NavbarComponent,
     SearchComponent,
     SongViewComponent,
     TestComponent,
+    ArtistViewComponent,
     Top50Component
   ],
   imports: [

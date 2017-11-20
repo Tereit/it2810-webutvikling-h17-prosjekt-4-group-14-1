@@ -1,4 +1,4 @@
-export class Artist {
+export class artist {
   constructor(
     public mbid: number,
     public name: string) { }

@@ -3,12 +3,6 @@ var path = require('path');
 var mongoose = require('mongoose');
 var bluebird = require('bluebird');
 
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
-var api = require('./src/api/routes/api.route');
-
 const port = process.env.PORT || 8084;
 
 var app = express();

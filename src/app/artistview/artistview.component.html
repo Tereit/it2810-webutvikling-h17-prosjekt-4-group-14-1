@@ -1,6 +1,17 @@
-<!-- Displaying search results as a grid list-->
 
-
-<div (click) = "clickMe()">
-  <p>{{artist.name}}</p>
+<!-- Displaying search results as a grid list with infinite scroll and animation-->
+<div class="artistview" (window:resize)="onResize($event)">
+    <div class="infinitescrollDiv"
+      infiniteScroll
+      [infiniteScrollDistance]="0.9"
+      [infiniteScrollThrottle]="500"
+      (scrolled)="onScroll()">
+      <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
+        <mat-grid-tile class="tile" *ngFor="let artist of artists | slice:0:limit">
+          <div class="animation"[@Animation]='state' (scrolled)="animateMe()">
+          <div class="artistcontent">{{artist.name}}</div>
+        </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+  </div>
 </div>
