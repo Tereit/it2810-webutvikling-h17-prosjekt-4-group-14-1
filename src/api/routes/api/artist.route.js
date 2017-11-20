@@ -115,6 +115,7 @@ router.put('/:id', function(req, res){
       artist.name = req.body.name || artist.name;
       artist.mbid = req.body.mbid || artist.mbid;
       artist.img  = req.body.img || artist.img;
+      artist.popularity = req.body.popularity || artist.popularity;
 
       artist.save((err, artist) => {
         if (err) {

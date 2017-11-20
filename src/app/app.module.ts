@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material';
-
+import { AgWordCloudModule } from 'angular4-word-cloud';
 
 // components
 import { AppComponent } from './app.component';
@@ -26,11 +26,13 @@ import { ArtistService } from './services/artist.service';
 
 // pipes
 import { IterableDictPipe } from './pipes/iterableDictPipe';
+import { WordcloudComponent } from './wordcloud/wordcloud.component';
 
 const appRoutes: Routes = [
   {path: '', component: FrontpageComponent},
   {path: 'top50/:country', component: Top50Component},
-  {path: 'test', component: TestComponent}
+  {path: 'test', component: TestComponent},
+  {path: 'wordcloud', component: WordcloudComponent}
 ];
 
 @NgModule({
@@ -44,7 +46,8 @@ const appRoutes: Routes = [
     TestComponent,
     ArtistViewComponent,
     Top50Component,
-    ArtistComponent
+    ArtistComponent,
+    WordcloudComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -55,7 +58,8 @@ const appRoutes: Routes = [
     MatIconModule,
     MatMenuModule,
     RouterModule.forRoot(appRoutes),
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    AgWordCloudModule.forRoot(),
   ],
   entryComponents: [
     ArtistComponent
