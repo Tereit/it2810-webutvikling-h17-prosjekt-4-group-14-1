@@ -1,9 +1,27 @@
+<!--
 <div class="songData">
     <h3>{{country}} Top 50</h3>
     <div class="artistview" (window:resize)="onResize($event)">
         <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
-          <mat-grid-tile class="tile" *ngFor="let artist of artists | IterableDictPipe"> <app-artistview [artist]=artist.value></app-artistview></mat-grid-tile>
+          <mat-grid-tile class="tile" *ngFor="let song of songs | IterableDictPipe"> <app-songview [song]=song.value></app-songview></mat-grid-tile>
         </mat-grid-list>
     </div>
 </div>
-  
+-->
+
+<div class="artistview" (window:resize)="onResize($event)">
+  <div class="infinitescrollDiv"
+    infiniteScroll
+    [infiniteScrollDistance]="0.9"
+    [infiniteScrollThrottle]="500"
+    (scrolled)="onScroll()">
+    <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
+      <mat-grid-tile class="tile" *ngFor="let song of songs | IterableDictPipe | slice:0:limit">
+        <mat-grid-tile-header>{{song.value.name}}</mat-grid-tile-header>
+        <app-songview [song]=song.value></app-songview>
+        <div class="animation"[@Animation]='state' (scrolled)="animateMe()">
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
