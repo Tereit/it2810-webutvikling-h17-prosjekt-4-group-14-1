@@ -3,6 +3,7 @@ import { ArtistService } from '../services/artist.service';
 import { Artist } from '../models/artist.model';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+// import { InfiniteScroll } from 'ngx-infinite-scroll';
 
 @Component({
     selector: 'app-search',
@@ -28,7 +29,7 @@ export class SearchComponent implements OnInit {
 
     state: 'small';
     // Assigning how many elements that should be displayed in a row
-    column: any = 5;
+    column: number = 5;
     // List for displaying items in elements
     displayedElements: Artist[] = [];
     // Defines how many elements that should be displayed at a time
@@ -39,8 +40,10 @@ export class SearchComponent implements OnInit {
     }
 
     getArtist(): void {
-        console.log('search para: ' + this.value);
-        this.artistService.getArtist(this.value).subscribe(data => this.artistSearchResult = data);
+        this.artistService.getArtist(this.value).subscribe(data => {
+            this.artistSearchResult = data;
+            console.log(this.artistSearchResult);
+        });
     }
 
     onKey(event: any) {
@@ -51,10 +54,11 @@ export class SearchComponent implements OnInit {
         this.state = ('small');
     }
     addItems() {
+        console.log(this.artistSearchResult);
         for (let i = 0; i < this.artistSearchResult.length; i++) {
             if (this.artistSearchResult.length !== this.displayedElements.length) {
                 this.displayedElements.push(this.artistSearchResult[i]);
-                console.log(this.displayedElements);
+                // console.log(this.displayedElements);
                 this.animateMe();
             }
         }
