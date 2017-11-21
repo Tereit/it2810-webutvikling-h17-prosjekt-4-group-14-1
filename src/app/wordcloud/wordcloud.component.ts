@@ -27,15 +27,6 @@ export class WordcloudComponent implements OnInit {
   // Create Work Cloud Data Array
 word_cloud: Array<AgWordCloudData> = [
         {size: 6, text: 'vitae',},
-        {size: 3, text: 'amet',},
-        {size: 10, text: 'sit',},
-        {size: 7, text: 'eget'},
-        {size: 4, text: 'mehehe',},
-        {size: 17, text: 'heh',},
-        {size: 2, text: 'hehehehe',},
-        {size: 1, text: 'woop',},
-        {size: 18, text: 'woopwoop',},
-        {size: 10, text: 'wop',},
 ];
 // Word Cloud Options
 options = {
