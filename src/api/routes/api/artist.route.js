@@ -26,53 +26,20 @@ router.get('/:artist', function(req, res){
     artists.forEach(function(artist){
       artistMap[artist._id] = artist;
     });
-    console.log('ArtistMap: ', artistMap);
-
     if (Object.keys(artistMap).length === 0) {
       console.log('Nothing found in local DB, searching LFM...');
-      var param = {
-        'artist': name,
-        'api_key': api_key
-      }
 
       var results = [];
-
-      lfm.artist.search(param, function(err, response){
-        if (err) {
-          console.log(err);
-          return null;
-        }
-        var data = response.artistmatches.artist;
-        for(var i = 0; i < data.length; i++) {
-                if(data[i].mbid.length <= 0) continue;
-                if(data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
-                result = {
-                    'name':       data[i].name,
-                    'mbid':       data[i].mbid,
-                    'img':        data[i].image[1]['#text'],
-                    'info':       "",
-                    'popularity': 1
-                }
-                results.push(result);
-                var tempArtist = new Artist({
-                  name:       result.name,
-                  mbid:       result.mbid,
-                  img:        result.img,
-                  info:       result.info,
-                  popularity: result.popularity
-                });
-                tempArtist.save();
-                console.log('Saved Artist: ', tempArtist);
-            }
-            res.send(results);
-        });
-
+      getArtistFromLFM(name, results, function(data) {
+        results = data;
+      });
+      res.send(results);
     } else {
       console.log('Found data in local DB');
       res.send(artistMap);
     }
-
   });
+
 });
 
 router.post('/:artist', function(req, res){
@@ -101,11 +68,11 @@ router.put('/:id', function(req, res){
     if (err) {
       res.send(500).send(err);
     } else {
-      artist.name = req.body.name || artist.name;
-      artist.mbid = req.body.mbid || artist.mbid;
-      artist.img  = req.body.img  || artist.img;
-      artist.info = req.body.info || artist.info;
-      artist.genres = req.body.genres || artist.genres;
+      artist.name       = req.body.name       || artist.name;
+      artist.mbid       = req.body.mbid       || artist.mbid;
+      artist.img        = req.body.img        || artist.img;
+      artist.info       = req.body.info       || artist.info;
+      artist.genres     = req.body.genres     || artist.genres;
       artist.popularity = req.body.popularity || artist.popularity;
       console.log(artist);
       artist.save((err, artist) => {
@@ -143,5 +110,65 @@ router.get('/info/:mbid', function(req, res){
     }
   });
 });
+
+function getInfo(results,callback){
+    lfm.artist.getInfo({mbid: results.mbid, api_key: api_key}, function(err, resp){
+      temp = {
+        'name': resp.name,
+        'mbid': resp.mbid,
+        'img': resp.image[3]['#text'],
+        'info': resp.bio.content,
+        'popularity': resp.stats.listeners,
+        'genres': resp.tags
+      }
+      saveArtist(temp);
+      callback(temp);
+  });
+}
+
+async function getAllInfo(results, callback) {
+  tempResults = [];
+  for(var artist in results) {
+    getInfo(results[artist], function(data) {
+      tempResults.push(data);
+    });
+    console.log(await tempResults);
+    callback(tempResults);
+  }
+}
+
+function getArtistFromLFM(artistName, results, callback){
+  var param = {
+    'artist': artistName,
+    'api_key': api_key
+  };
+  lfm.artist.search(param, function(err, response){
+    if (err) {
+      console.log(err);
+      return null;
+    }
+    var data = response.artistmatches.artist;
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].mbid.length <= 0) continue;
+      if (data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
+      result = {
+        'name': data[i].name,
+        'mbid': data[i].mbid,
+        'img': data[i].img,
+        'info': '',
+        'popularity': '',
+        'genres': '',
+      };
+      results.push(result);
+    }
+     getAllInfo(results, function(data) {
+       callback(data)
+    });
+  });
+}
+
+function saveArtist(artists){
+  // console.log(artists);
+}
 
 module.exports = router;

@@ -25,7 +25,15 @@ export class ArtistService {
   getArtist(name: string): Observable<Artist[]> {
     return this.http.get(this.artist_url + name).map(res => {
       console.log('Getting artist: ' + name);
+      for (let artist in res) {
+          console.log(res[artist].mbid);
+          this.getInfo(res[artist].mbid).map(data =>{
+            console.log(data);
+          });
+      }
+
       return res as Artist[];
+
     });
   }
 
