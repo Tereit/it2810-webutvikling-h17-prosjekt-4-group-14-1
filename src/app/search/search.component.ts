@@ -96,7 +96,22 @@ export class SearchComponent implements OnInit {
             this.column = 1;
         }
     }
+    setColumns() {
+        const width = window.innerWidth;
+        if (width > 1500) {
+            this.column = 5;
+        } else if (width > 1200) {
+            this.column = 4;
+        } else if (width > 900) {
+            this.column = 3;
+        } else if (width > 600) {
+            this.column = 2;
+        } else if (width > 300) {
+            this.column = 1;
+        }
+    }
     ngOnInit() {
+        this.setColumns();
         this.addItems();
         this.animateMe();
     }
