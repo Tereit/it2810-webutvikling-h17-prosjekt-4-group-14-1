@@ -34,6 +34,7 @@ export class SearchComponent implements OnInit {
     displayedElements: Artist[] = [];
     // Defines how many elements that should be displayed at a time
     limit = 5;
+    searchHistory: String[] = [];
     constructor(private artistService: ArtistService) {
         // this.addItems();
         // this.animateMe();
@@ -43,6 +44,8 @@ export class SearchComponent implements OnInit {
         this.artistService.getArtist(this.value).subscribe(data => {
             this.artistSearchResult = data;
             // console.log(this.artistSearchResult);
+            this.searchHistory.push(this.value);
+            sessionStorage.setItem('searchedArtists', JSON.stringify(this.searchHistory));
         });
     }
 

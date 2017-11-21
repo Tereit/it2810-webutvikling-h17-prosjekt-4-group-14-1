@@ -9,8 +9,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ArtistService {
 
-  api_url    = 'http://localhost:8084/api';
-  artist_url = this.api_url + '/artist/';
+  api_url     = 'http://localhost:8084/api';
+  artist_url  = this.api_url + '/artist/';
+  getInfo_url = this.api_url + '/artist/info/';
 
   constructor(private http: HttpClient) { }
 
@@ -26,11 +27,24 @@ export class ArtistService {
     });
   }
 
+  getInfo(mbid: string): Observable<any> {
+    return this.http.get(this.getInfo_url + mbid).map(res => {
+      return res as Object[];
+    })
+  }
+
   createArtist(artist: Artist): Observable<any> {
     console.log('In service: ', artist);
     console.log(`${this.artist_url}`, artist);
     return this.http.post(`${this.artist_url}`, artist).map(res => {
       return res as Artist[];
     });
+  }
+
+  updateArtist(artist: Artist){
+    return this.http.put(this.artist_url + artist._id, artist).map(res => {
+      console.log('Attempting to update artist...');
+      return res as Artist;
+    })
   }
 }

@@ -25,6 +25,8 @@ router.get('/:artist', function(req, res){
     var artistMap = {};
     artists.forEach(function(artist){
       artistMap[artist._id] = artist;
+      // Artist.findByIdAndUpdate(artist._id, {$inc:{popularity: 1}});
+      console.log(artist.popularity);
     });
     console.log('ArtistMap: ', artistMap);
 
@@ -34,32 +36,41 @@ router.get('/:artist', function(req, res){
         'artist': name,
         'api_key': api_key
       }
+
+      var results = [];
+
       lfm.artist.search(param, function(err, response){
         if (err) {
           console.log(err);
           return null;
         }
         var data = response.artistmatches.artist;
-        var results = [];
         for(var i = 0; i < data.length; i++) {
                 if(data[i].mbid.length <= 0) continue;
                 if(data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
                 result = {
-                    'name': data[i].name,
-                    'mbid': data[i].mbid,
-                    'img': data[i].image[1]['#text']
+                    'name':       data[i].name,
+                    'mbid':       data[i].mbid,
+                    'img':        data[i].image[1]['#text'],
+                    'info':       "",
+                    'popularity': 1
                 }
                 results.push(result);
                 var tempArtist = new Artist({
-                  name: result.name,
-                  mbid: result.mbid,
-                  img: result.img
+                  name:       result.name,
+                  mbid:       result.mbid,
+                  img:        result.img,
+                  info:       result.info,
+                  popularity: result.popularity
                 });
                 // tempArtist.save();
             }
             console.log('results: ', results);
+            // getInfo(results);
+
             res.send(results);
         });
+
     } else {
       console.log('Found data in local DB');
       res.send(artistMap);
@@ -68,34 +79,15 @@ router.get('/:artist', function(req, res){
   });
 });
 
-// lfm.artist.search(param, function(err, res) {
-//     if(err) {
-//         console.log(err);
-//         return null;
-//     }
-//     var data = res.artistmatches.artist;
-//     var results = [];
-//     for(var i = 0; i < data.length; i++) {
-//         if(data[i].mbid.length <= 0) continue;
-//         if(data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
-//         result = {
-//             'name': data[i].name,
-//             'mbid': data[i].mbid,
-//             'img': data[i].image[1]['#text']
-//         }
-//         results.push(result);
-//     }
-//     response.send(results);
-// });
-// }
-
-
 router.post('/:artist', function(req, res){
   console.log('in API: ', req);
   var newArtist = new Artist({
-    name: req.body.name,
-    mbid: req.body.mbid,
-    img:  req.body.img
+    name:       req.body.name,
+    mbid:       req.body.mbid,
+    img:        req.body.img,
+    info:       req.body.info,
+    genres:     req.body.genres,
+    popularity: req.body.popularity
   });
 
   newArtist.save((e, newArtist) => {
@@ -107,6 +99,7 @@ router.post('/:artist', function(req, res){
 });
 
 router.put('/:id', function(req, res){
+  console.log('Reached server for update...');
   let id = req.params.id;
   Artist.findById(id, (err, artist) => {
     if (err) {
@@ -114,7 +107,10 @@ router.put('/:id', function(req, res){
     } else {
       artist.name = req.body.name || artist.name;
       artist.mbid = req.body.mbid || artist.mbid;
-      artist.img  = req.body.img || artist.img;
+      artist.img  = req.body.img  || artist.img;
+      artist.info = req.body.info || artist.info;
+      artist.genres = req.body.genres || artist.genres;
+      artist.popularity = req.body.popularity || artist.popularity;
 
       artist.save((err, artist) => {
         if (err) {
@@ -138,5 +134,18 @@ router.delete('/:id', function(req, res){
   });
 });
 
+router.get('/info/:mbid', function(req, res){
+  let mbid = req.params.mbid;
+  let results = [];
+  lfm.artist.getInfo({mbid: mbid, api_key: api_key}, function(err, response){
+    if (err) {
+      console.log(err);
+      return null;
+    } else {
+      results.push(response.bio.content);
+      res.send(results);
+    }
+  });
+});
 
 module.exports = router;
