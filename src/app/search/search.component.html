@@ -15,7 +15,7 @@
     <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight=300px>
       <mat-grid-tile class="tile" *ngFor="let artist of artistSearchResult | IterableDictPipe | slice:0:limit">
         <div class="animation"[@Animation]='state' (scrolled)="animateMe()">
-          <mat-grid-tile-header>{{artist.value.name}}</mat-grid-tile-header>
+          <mat-grid-tile-header><span style="margin-left:auto; margin-right:auto">{{artist.value.name}}</span></mat-grid-tile-header>
           <app-artistview [artist]=artist.value></app-artistview>
         </div>
       </mat-grid-tile>
