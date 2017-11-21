@@ -42,6 +42,9 @@ export class Top50Component implements OnInit {
     getTop50Songs(): void {
       this.songService.getTop50(this.country).subscribe(data => {
         this.songs = data;
+        this.songs.sort((n1, n2) => {
+            return parseInt(n2.listeners, 10) - parseInt(n1.listeners, 10);
+        });
       });
     }
 

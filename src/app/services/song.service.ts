@@ -16,6 +16,6 @@ export class SongService {
   getTop50(country): Observable<Song[]> {
     return this.http.get(this.top50_url + country).map(res => {
       return res as Song[];
-    })
+    });
   }
 }

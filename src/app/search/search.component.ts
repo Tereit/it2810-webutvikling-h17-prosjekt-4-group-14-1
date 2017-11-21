@@ -3,7 +3,6 @@ import { ArtistService } from '../services/artist.service';
 import { Artist } from '../models/artist.model';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
-// import { InfiniteScroll } from 'ngx-infinite-scroll';
 
 @Component({
     selector: 'app-search',
@@ -34,15 +33,24 @@ export class SearchComponent implements OnInit {
     displayedElements: Artist[] = [];
     // Defines how many elements that should be displayed at a time
     limit = 15;
-    constructor(private artistService: ArtistService) {
-        // this.addItems();
-        // this.animateMe();
-    }
+    constructor(private artistService: ArtistService) {}
 
     getArtist(): void {
         this.artistService.getArtist(this.value).subscribe(data => {
             this.artistSearchResult = data;
-            // console.log(this.artistSearchResult);
+        });
+    }
+
+    sortBy() {
+        this.artistSearchResult.sort((n1, n2): number => {
+            if (n1.name > n2.name) {
+                return 1;
+            }
+            if (n1.name < n2.name) {
+                return -1;
+            } else {
+                return 0;
+            }
         });
     }
 
@@ -76,7 +84,6 @@ export class SearchComponent implements OnInit {
     // Making grid list responsive
     onResize(event) {
         const element = event.target.innerWidth;
-        console.log(element);
         if (element > 1050) {
             this.column = 5;
         }
