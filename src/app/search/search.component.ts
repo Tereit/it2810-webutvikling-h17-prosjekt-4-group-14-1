@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
     // List for displaying items in elements
     displayedElements: Artist[] = [];
     // Defines how many elements that should be displayed at a time
-    limit = 5;
+    limit = 15;
     constructor(private artistService: ArtistService) {}
 
     getArtist(): void {

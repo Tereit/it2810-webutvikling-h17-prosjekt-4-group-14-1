@@ -1,6 +1,6 @@
 <div class="wrap">
     <div class="search">
-       <input type="text" class="searchTerm" placeholder="Search artist, song, etc." (keyup)="onKey($event)">
+       <input type="text" class="searchTerm" placeholder="Search artist" (keyup)="onKey($event)">
        <button type="submit" class="searchButton" (click)="getArtist()">
          <i class="material-icons">search</i> <!-- Search-icon -->
        </button>
@@ -14,9 +14,10 @@
     [infiniteScrollThrottle]="500"
     (scrolled)="onScroll()">
     <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
-      <mat-grid-tile class="tile" *ngFor="let artist of artistSearchResult | IterableDictPipe | slice:0:limit"> <app-artistview [artist]=artist.value></app-artistview>
+      <mat-grid-tile class="tile" *ngFor="let artist of artistSearchResult | IterableDictPipe | slice:0:limit">
+        <mat-grid-tile-header>{{artist.value.name}}</mat-grid-tile-header>
+        <app-artistview [artist]=artist.value></app-artistview>
         <div class="animation"[@Animation]='state' (scrolled)="animateMe()">
-            <div class="artistcontent">{{artist.name}}</div>
         </div>
       </mat-grid-tile>
     </mat-grid-list>
