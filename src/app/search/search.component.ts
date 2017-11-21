@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
 
     state: 'small';
     // Assigning how many elements that should be displayed in a row
-    column: number = 5;
+    column: number = this.setColumns();
     // List for displaying items in elements
     displayedElements: Artist[] = [];
     // Defines how many elements that should be displayed at a time
@@ -96,22 +96,21 @@ export class SearchComponent implements OnInit {
             this.column = 1;
         }
     }
-    setColumns() {
-        const width = window.innerWidth;
+    setColumns(): number {
+        const width = document.documentElement.clientWidth;
         if (width > 1500) {
-            this.column = 5;
+            return 5;
         } else if (width > 1200) {
-            this.column = 4;
+            return 4;
         } else if (width > 900) {
-            this.column = 3;
+            return 3;
         } else if (width > 600) {
-            this.column = 2;
+            return 2;
         } else if (width > 300) {
-            this.column = 1;
+            return 1;
         }
     }
     ngOnInit() {
-        this.setColumns();
         this.addItems();
         this.animateMe();
     }
