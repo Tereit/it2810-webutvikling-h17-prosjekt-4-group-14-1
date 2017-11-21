@@ -19,28 +19,50 @@ router.get('/', function(req, res){
   });
 });
 
+// router.get('/:artist', function(req, res){
+//   let name = req.params.artist;
+//   Artist.find({name: new RegExp('^'+name+'$', "i")}, function(err, artists){
+//     var artistMap = {};
+//     artists.forEach(function(artist){
+//       artistMap[artist._id] = artist;
+//     });
+//     if (Object.keys(artistMap).length === 0) {
+//       console.log('Nothing found in local DB, searching LFM...');
+//
+//       var results = [];
+//       getArtistFromLFM(name, results, function(data) {
+//         saveArtist(data);
+//         res.send(data);
+//       });
+//       // res.send(results);
+//     } else {
+//       console.log('Found data in local DB');
+//       res.send(artistMap);
+//     }
+//   });
+// });
+
 router.get('/:artist', function(req, res){
   let name = req.params.artist;
-  Artist.find({name: new RegExp('^'+name+'$', "i")}, function(err, artists){
-    var artistMap = {};
-    artists.forEach(function(artist){
-      artistMap[artist._id] = artist;
-    });
-    if (Object.keys(artistMap).length === 0) {
-      console.log('Nothing found in local DB, searching LFM...');
-
-      var results = [];
-      getArtistFromLFM(name, results, function(data) {
-        results = data;
-      });
-      res.send(results);
-    } else {
-      console.log('Found data in local DB');
-      res.send(artistMap);
-    }
+  Promise(getFromDB(name)).then(function(resultFromDB){
+    console.log(resultFromDB);
   });
-
 });
+
+function getFromDB(query) {
+  return new Promise(function(resolve, reject){
+    Artist.find({name: new RegExp('^'+name+'$', "i")}, function(err, artists){
+      if (err) {
+        return reject(err);
+      }
+      var artistMap = {};
+      artists.forEach(function(artist){
+        artistMap[artist._id] = artist;
+      });
+      return resolve(artistMap);
+  });
+})
+}
 
 router.post('/:artist', function(req, res){
   console.log('in API: ', req);
@@ -111,30 +133,32 @@ router.get('/info/:mbid', function(req, res){
   });
 });
 
-function getInfo(results,callback){
+function getInfo(results){
+  return new Promise(function(resolve, reject){
     lfm.artist.getInfo({mbid: results.mbid, api_key: api_key}, function(err, resp){
-      temp = {
-        'name': resp.name,
-        'mbid': resp.mbid,
-        'img': resp.image[3]['#text'],
-        'info': resp.bio.content,
-        'popularity': resp.stats.listeners,
-        'genres': resp.tags
-      }
-      saveArtist(temp);
-      callback(temp);
-  });
+      if (err) {
+        return reject(err);
+      } return resolve({
+            'name': resp.name,
+            'mbid': resp.mbid,
+            'img': resp.image[3]['#text'],
+            'info': resp.bio.content,
+            'popularity': resp.stats.listeners,
+            'genres': resp.tags
+          });
+        });
+      });
 }
 
-async function getAllInfo(results, callback) {
-  tempResults = [];
-  for(var artist in results) {
-    getInfo(results[artist], function(data) {
-      tempResults.push(data);
-    });
-    console.log(await tempResults);
-    callback(tempResults);
+function getAllInfo(results, callback) {
+  var reqArray = [];
+  var finalResults = [];
+  for (var artist in results) {
+    reqArray.push(getInfo(results[artist]));
   }
+  Promise.all(reqArray).then(function(allData){
+    callback(allData);
+  });
 }
 
 function getArtistFromLFM(artistName, results, callback){
@@ -168,7 +192,27 @@ function getArtistFromLFM(artistName, results, callback){
 }
 
 function saveArtist(artists){
-  // console.log(artists);
+
+    tempArtist = new Artist();
+    tempArtist.name = artists[artist].name;
+    tempArtist.mbid = artists[artist].mbid;
+    tempArtist.img = artists[artist].img;
+    tempArtist.info = artists[artist].info;
+    tempArtist.popularity = artists[artist].popularity;
+    tempArtist.genres = artists[artist].genres;
+    // tempArtist.save();
+
+}
+
+function MBIDchecker(artist, callback){
+  resultList = [];
+  for (var artist in artists) {
+    Artist.find({mbid: artists[artist].mbid}, function(err, result) {
+      result.forEach(item => {
+        console.log(item.mbid);
+        resultList.push(item.mbid);
+      });
+    });
 }
 
 module.exports = router;
