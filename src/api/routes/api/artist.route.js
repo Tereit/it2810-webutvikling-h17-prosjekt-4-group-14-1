@@ -19,39 +19,28 @@ router.get('/', function(req, res){
   });
 });
 
-// router.get('/:artist', function(req, res){
-//   let name = req.params.artist;
-//   Artist.find({name: new RegExp('^'+name+'$', "i")}, function(err, artists){
-//     var artistMap = {};
-//     artists.forEach(function(artist){
-//       artistMap[artist._id] = artist;
-//     });
-//     if (Object.keys(artistMap).length === 0) {
-//       console.log('Nothing found in local DB, searching LFM...');
-//
-//       var results = [];
-//       getArtistFromLFM(name, results, function(data) {
-//         saveArtist(data);
-//         res.send(data);
-//       });
-//       // res.send(results);
-//     } else {
-//       console.log('Found data in local DB');
-//       res.send(artistMap);
-//     }
-//   });
-// });
-
 router.get('/:artist', function(req, res){
   let name = req.params.artist;
-  Promise(getFromDB(name)).then(function(resultFromDB){
-    console.log(resultFromDB);
+  let mbids = [];
+  getFromDB(name).then(function(resultFromDB){
+    for (var key in resultFromDB) {
+      mbids.push(resultFromDB[key].mbid);
+    }
+    if (mbids.length > 0) {
+      res.send(resultFromDB);
+    } else {
+      let results = [];
+      getArtistFromLFM(name, results, function(data){
+        saveArtist(data);
+        res.send(data);
+      });
+    }
   });
 });
 
 function getFromDB(query) {
   return new Promise(function(resolve, reject){
-    Artist.find({name: new RegExp('^'+name+'$', "i")}, function(err, artists){
+    Artist.find({name: { "$regex": query, "$options": "i" }}, function(err, artists){
       if (err) {
         return reject(err);
       }
@@ -185,14 +174,15 @@ function getArtistFromLFM(artistName, results, callback){
       };
       results.push(result);
     }
-     getAllInfo(results, function(data) {
+    getAllInfo(results, function(data) {
        callback(data)
     });
   });
 }
 
 function saveArtist(artists){
-
+  console.log("Storing new artists in DB");
+  for(let artist in artists) {
     tempArtist = new Artist();
     tempArtist.name = artists[artist].name;
     tempArtist.mbid = artists[artist].mbid;
@@ -200,8 +190,8 @@ function saveArtist(artists){
     tempArtist.info = artists[artist].info;
     tempArtist.popularity = artists[artist].popularity;
     tempArtist.genres = artists[artist].genres;
-    // tempArtist.save();
-
+    tempArtist.save();
+  }
 }
 
 function MBIDchecker(artist, callback){
@@ -213,6 +203,6 @@ function MBIDchecker(artist, callback){
         resultList.push(item.mbid);
       });
     });
+  }
 }
-
 module.exports = router;
