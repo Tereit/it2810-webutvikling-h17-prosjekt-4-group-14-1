@@ -4,7 +4,6 @@
        <button type="submit" class="searchButton" (click)="getArtist()">
          <i class="material-icons">search</i> <!-- Search-icon -->
        </button>
-       <button (click)="sortBy()">Sort</button>
     </div>
 </div>
 <div class="artistview" (window:resize)="onResize($event)">
@@ -15,9 +14,9 @@
     (scrolled)="onScroll()">
     <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
       <mat-grid-tile class="tile" *ngFor="let artist of artistSearchResult | IterableDictPipe | slice:0:limit">
-        <mat-grid-tile-header>{{artist.value.name}}</mat-grid-tile-header>
-        <app-artistview [artist]=artist.value></app-artistview>
         <div class="animation"[@Animation]='state' (scrolled)="animateMe()">
+          <mat-grid-tile-header>{{artist.value.name}}</mat-grid-tile-header>
+          <app-artistview [artist]=artist.value></app-artistview>
         </div>
       </mat-grid-tile>
     </mat-grid-list>
