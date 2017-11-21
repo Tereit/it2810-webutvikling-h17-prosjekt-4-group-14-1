@@ -6,6 +6,20 @@
        </button>
        <button (click)="sortBy()">Sort</button>
     </div>
+    <!-- selecting what to sort by -->
+    <mat-form-field>
+      <mat-select placeholder="Sort by: ">
+        <mat-option *ngFor="let item of sortItems" [value]="item.value">
+          {{ item.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- selecting filters -->
+    <mat-form-field>
+      <mat-select placeholder="Filter: " [formControl]="filterSelect" multiple>
+        <mat-option *ngFor="let filter of filterList" [value]="filter">{{filter}}</mat-option>
+      </mat-select>
+    </mat-form-field>    
 </div>
 <div class="artistview" (window:resize)="onResize($event)">
   <div class="infinitescrollDiv"

@@ -3,6 +3,7 @@ import { ArtistService } from '../services/artist.service';
 import { Artist } from '../models/artist.model';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-search',
@@ -26,6 +27,15 @@ export class SearchComponent implements OnInit {
     value = '';
     artistSearchResult: Artist[] = [];
 
+    // list of options for the sortBy field
+    sortItems = [
+        {value: 'name', viewValue: 'Name'}
+    ];
+
+    // filter selection
+    filterSelect = new FormControl();
+    filterList = ['Rock', 'Pop', 'Rap'];
+
     state: 'small';
     // Assigning how many elements that should be displayed in a row
     column: number = 5;
@@ -41,12 +51,12 @@ export class SearchComponent implements OnInit {
         });
     }
 
-    sortBy() {
+    sortBy(name) {
         this.artistSearchResult.sort((n1, n2): number => {
-            if (n1.name > n2.name) {
+            if (n1[name] > n2[name]) {
                 return 1;
             }
-            if (n1.name < n2.name) {
+            if (n1[name] < n2[name]) {
                 return -1;
             } else {
                 return 0;
