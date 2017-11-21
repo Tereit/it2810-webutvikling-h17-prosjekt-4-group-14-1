@@ -42,7 +42,7 @@ export class Top50Component implements OnInit {
     getTop50Songs(): void {
       this.songService.getTop50(this.country).subscribe(data => {
         this.songs = data;
-      })
+      });
     }
 
     animateMe() {
