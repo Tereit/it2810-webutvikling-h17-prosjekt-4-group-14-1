@@ -23,6 +23,7 @@ import { ArtistComponent } from './artist/artist.component';
 
 // services
 import { ArtistService } from './services/artist.service';
+import { SongService } from './services/song.service';
 
 // pipes
 import { IterableDictPipe } from './pipes/iterableDictPipe';
@@ -64,7 +65,7 @@ const appRoutes: Routes = [
   entryComponents: [
     ArtistComponent
   ],
-  providers: [ArtistService],
+  providers: [ArtistService, SongService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
