@@ -47,7 +47,7 @@ router.get('/:artist', function(req, res){
                 result = {
                     'name': data[i].name,
                     'mbid': data[i].mbid,
-                    'img': data[i].image[1]['#text']
+                    'img': data[i].image[3]['#text']
                 }
                 results.push(result);
                 var tempArtist = new Artist({
@@ -55,7 +55,7 @@ router.get('/:artist', function(req, res){
                   mbid: result.mbid,
                   img: result.img
                 });
-                // tempArtist.save();
+                tempArtist.save();
             }
             console.log('results: ', results);
             res.send(results);

@@ -23,8 +23,9 @@ exports.getArtist = function(request, response) {
             result = {
                 'name': data[i].name,
                 'mbid': data[i].mbid,
-                'img': data[i].image[1]['#text']
+                'img': data[i].image[3]['#text']
             }
+            console.log(data[i].image);
             results.push(result);
         }
         response.send(results);
@@ -76,7 +77,7 @@ exports.getTop50 = function(request, response) {
                 'name': data[i].name,
                 'listeners': data[i].listeners,
                 'artist': data[i].artist["name"],
-                'img': data[i].image[1]["#text"]
+                'img': data[i].image[3]["#text"]
             }
             results.push(result);
         }
