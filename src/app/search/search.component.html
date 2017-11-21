@@ -8,7 +8,7 @@
     </div>
     <!-- selecting what to sort by -->
     <mat-form-field>
-      <mat-select placeholder="Sort by: ">
+      <mat-select placeholder="Sort by: " [(ngModel)]="selectedSortValue" (selectionChange)="changedSort($event)">
         <mat-option *ngFor="let item of sortItems" [value]="item.value">
           {{ item.viewValue }}
         </mat-option>
@@ -16,7 +16,7 @@
     </mat-form-field>
     <!-- selecting filters -->
     <mat-form-field>
-      <mat-select placeholder="Filter: " [formControl]="filterSelect" multiple>
+      <mat-select placeholder="Filter: " [formControl]="filterSelect" multiple [(ngModel)]="selectedFilters" (selectionChange)="changedFiler($event)">
         <mat-option *ngFor="let filter of filterList" [value]="filter">{{filter}}</mat-option>
       </mat-select>
     </mat-form-field>    
