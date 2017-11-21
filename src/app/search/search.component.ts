@@ -84,19 +84,15 @@ export class SearchComponent implements OnInit {
     // Making grid list responsive
     onResize(event) {
         const element = event.target.innerWidth;
-        if (element > 1050) {
+        if (element > 1500) {
             this.column = 5;
-        }
-        if (element > 950 && element < 1050) {
+        } else if (element > 1200) {
             this.column = 4;
-        }
-        if (element < 850) {
+        } else if (element > 900) {
             this.column = 3;
-        }
-        if (element < 750) {
+        } else if (element > 600) {
             this.column = 2;
-        }
-        if (element < 650) {
+        } else if (element > 300) {
             this.column = 1;
         }
     }
