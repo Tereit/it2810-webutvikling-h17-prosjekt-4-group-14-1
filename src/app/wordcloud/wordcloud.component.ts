@@ -10,24 +10,57 @@ import { Artist } from '../models/artist.model';
 })
 export class WordcloudComponent implements OnInit {
   artistSearchResult: Artist[]=[];
+  artist =''
+  word_cloud: Array<AgWordCloudData> = [];
 
   constructor(private artistService: ArtistService) { }
-/*
+
   getArtist(): void {
       this.artistService.getAllArtists().subscribe(data => {
-          this.artistSearchResult = data;
-          // console.log(this.artistSearchResult);
+        let s = 1;
+        for(let item in data) {
+          this.word_cloud.push({size: s, text: data[item].name});
+          s++;
+        }
+        //data[item].popularity
+          //this.artistSearchResult = data;
+          //console.log(this.artistSearchResult);
+          //this.populateCloud();
+          console.log(this.word_cloud);
       });
+  }
+
+  /*populateCloud(): void {
+    this.artistSearchResult.forEach(artist => {
+      let cloudItem = {size: 5, text:artist.name};
+      this.word_cloud.push(cloudItem);
+    });
   }*/
-/*for (artist : this.artistSearchResult) {
+/*
+  addToWordCloud() {
+  for (this.artist in this.artistSearchResult) {
+    let name = this.artistSearchResult[this.artist].name;
+    let size = 5;
+    this.word_cloud.push({size: size, text: name})
+
+}}
+
+}
+  for (artist : this.artistSearchResult) {
   let size = artistSearchResult[artist].popularity  // 546
   let name = artistSearchResult[artist].name;
   this.word_cloud.push({size: size, text: name})
-}*/
+}
+*/
+
+
   // Create Work Cloud Data Array
-word_cloud: Array<AgWordCloudData> = [
-        {size: 6, text: 'vitae',},
-];
+/*word_cloud: Array<AgWordCloudData> = [
+        {size: 5, text: 'heheh',},
+        {size: 10, text: 'mehehe',},
+        {size: 3, text: 'wop',},
+        {size: 19, text: 'wooop',},
+];*/
 // Word Cloud Options
 options = {
     settings: {
@@ -44,6 +77,7 @@ options = {
 };
 
   ngOnInit() {
+    this.getArtist();
   }
 
 }
