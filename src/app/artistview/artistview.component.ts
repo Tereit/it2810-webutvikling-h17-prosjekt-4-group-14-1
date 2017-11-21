@@ -14,18 +14,26 @@ export class ArtistViewComponent {
   @Input() artist: Artist = null;
   artistDialogRef: MatDialogRef<ArtistComponent>;
   artistInfo: string;
+  artistPop: string;
+  artistGenres: string[];
   newArtist: Artist = null;
 
   constructor(private dialog: MatDialog, private artistService: ArtistService) {}
   clickMe() {
     this.artistService.getInfo(this.artist.mbid).subscribe(data => {
-      this.artistInfo = data;
-      this.artist.info = this.artistInfo;
+      data.forEach(item => {
+        this.artistInfo   = item.bio.content;
+        this.artistPop    = item.stats.listeners;
+        this.artistGenres = item.tags;
+      });
+      this.artist.info       = this.artistInfo;
+      this.artist.popularity = this.artistPop;
+      this.artist.genres     = this.artistGenres;
       this.artistService.updateArtist(this.artist).subscribe(data => {
         this.newArtist = data;
         console.log(data);
-      })
-    })
-    this.artistDialogRef = this.dialog.open(ArtistComponent, {data: this.artist});
+      });
+    });
+    this.artistDialogRef = this.dialog.open(ArtistComponent, {data: this.newArtist});
   }
 }

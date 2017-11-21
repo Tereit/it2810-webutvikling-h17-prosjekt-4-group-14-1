@@ -7,7 +7,7 @@ var artistSchema = new mongoose.Schema({
   img: String,
   info: String,
   genres: [],
-  popuarity: Number
+  popularity: String
 });
 
 // artistSchema.plugin(mongoosePaginate);

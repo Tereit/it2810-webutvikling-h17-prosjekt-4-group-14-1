@@ -25,8 +25,6 @@ router.get('/:artist', function(req, res){
     var artistMap = {};
     artists.forEach(function(artist){
       artistMap[artist._id] = artist;
-      // Artist.findByIdAndUpdate(artist._id, {$inc:{popularity: 1}});
-      console.log(artist.popularity);
     });
     console.log('ArtistMap: ', artistMap);
 
@@ -63,11 +61,9 @@ router.get('/:artist', function(req, res){
                   info:       result.info,
                   popularity: result.popularity
                 });
-                // tempArtist.save();
+                tempArtist.save();
+                console.log('Saved Artist: ', tempArtist);
             }
-            console.log('results: ', results);
-            // getInfo(results);
-
             res.send(results);
         });
 
@@ -111,7 +107,7 @@ router.put('/:id', function(req, res){
       artist.info = req.body.info || artist.info;
       artist.genres = req.body.genres || artist.genres;
       artist.popularity = req.body.popularity || artist.popularity;
-
+      console.log(artist);
       artist.save((err, artist) => {
         if (err) {
           res.status(500).send(err);
@@ -142,7 +138,7 @@ router.get('/info/:mbid', function(req, res){
       console.log(err);
       return null;
     } else {
-      results.push(response.bio.content);
+      results.push(response);
       res.send(results);
     }
   });

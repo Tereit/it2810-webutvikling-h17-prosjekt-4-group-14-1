@@ -17,26 +17,28 @@ export class ArtistService {
 
   getAllArtists(): Observable<Artist[]> {
     return this.http.get(this.artist_url).map(res => {
+      console.log('Getting all artists...');
       return res as Artist[];
     });
   }
 
   getArtist(name: string): Observable<Artist[]> {
     return this.http.get(this.artist_url + name).map(res => {
+      console.log('Getting artist: ' + name);
       return res as Artist[];
     });
   }
 
   getInfo(mbid: string): Observable<any> {
     return this.http.get(this.getInfo_url + mbid).map(res => {
+      console.log('Getting info for MBID: ' + mbid);
       return res as Object[];
-    })
+    });
   }
 
   createArtist(artist: Artist): Observable<any> {
-    console.log('In service: ', artist);
-    console.log(`${this.artist_url}`, artist);
     return this.http.post(`${this.artist_url}`, artist).map(res => {
+      console.log('Attempting to create artist: ' + artist);
       return res as Artist[];
     });
   }
