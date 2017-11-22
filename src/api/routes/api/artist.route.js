@@ -58,7 +58,6 @@ function getFromDB(query) {
 }
 
 router.post('/:artist', function(req, res){
-  console.log('in API: ', req);
   var newArtist = new Artist({
     name:       req.body.name,
     mbid:       req.body.mbid,
@@ -117,7 +116,7 @@ function getInfo(results){
     lfm.artist.getInfo({mbid: results.mbid, api_key: api_key}, function(err, resp){
       if (err) {
         return reject(err);
-      } 
+      }
       var genres = [];
       resp.tags.tag.forEach(item => genres.push(item.name));
       return resolve({
