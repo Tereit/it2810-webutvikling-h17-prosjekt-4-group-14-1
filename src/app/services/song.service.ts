@@ -1,14 +1,15 @@
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Rx';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+import {environment} from '../../environments/environment';
 
 import {Song} from '../models/song.model';
 
 @Injectable()
 export class SongService {
 
-  api_url    = 'http://localhost:8084/api';
+  api_url    = environment.api_url;
   top50_url = this.api_url + '/lfm/top50/';
 
   constructor(private http: HttpClient) { }

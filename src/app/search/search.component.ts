@@ -4,6 +4,8 @@ import { Artist } from '../models/artist.model';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { FormControl } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
     selector: 'app-search',
@@ -28,6 +30,7 @@ export class SearchComponent implements OnInit {
     artistSearchResult: Artist[] = [];
     unfilteredSearchResult: Artist[] = [];
     minPopValue: number = 0;
+    profile: any;
 
     // list of options for the sortBy field
     sortItems = [
@@ -53,7 +56,18 @@ export class SearchComponent implements OnInit {
     displayedElements: Artist[] = [];
     // Defines how many elements that should be displayed at a time
     limit = 15;
-    constructor(private artistService: ArtistService) {}
+    constructor(private artistService: ArtistService, private auth: AuthService,
+    private userService: UserService) {}
+
+    getProfile(){
+      if (this.auth.userProfile) {
+        this.profile = this.auth.userProfile;
+      } else {
+        this.auth.getProfile((err, profile) => {
+          this.profile = profile;
+        });
+      }
+    };
 
     /**
      * @description retreives artists from the artist service, populates filters and sorts the artists
@@ -62,6 +76,10 @@ export class SearchComponent implements OnInit {
     getArtist(): void {
         let tempData = [];
         this.currentFilters = [];
+
+        if (this.profile){
+          this.userService.updateHistory(this.profile.name, this.value).subscribe();
+        }
         this.artistService.getArtist(this.value).subscribe(data => {
             let allGenres = [];
             // data retreived by artistService is not iterable, moving them to a new array
@@ -243,5 +261,6 @@ export class SearchComponent implements OnInit {
     ngOnInit() {
         this.addItems();
         this.animateMe();
+        this.getProfile();
     }
 }
