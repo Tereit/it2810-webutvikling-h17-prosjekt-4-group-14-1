@@ -15,12 +15,13 @@
     [infiniteScrollDistance]="0.9"
     [infiniteScrollThrottle]="500"
     (scrolled)="onScroll()">
-    <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
+    <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight=300px>
       <mat-grid-tile class="tile" *ngFor="let song of songs | IterableDictPipe | slice:0:limit">
-        <mat-grid-tile-header>{{song.value.name}}</mat-grid-tile-header>
-        <app-songview [song]=song.value></app-songview>
         <div class="animation"[@Animation]='state' (scrolled)="animateMe()">
+          <mat-grid-tile-header>{{song.value.name}}</mat-grid-tile-header>
+          <app-songview [song]=song.value></app-songview>
         </div>
+
       </mat-grid-tile>
     </mat-grid-list>
   </div>
