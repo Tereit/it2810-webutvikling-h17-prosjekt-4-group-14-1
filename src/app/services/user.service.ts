@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserService {
 
-  api_url  = environment.api_url;
+  api_url  = environment.api_url + 'user/';
 
   constructor(private http: HttpClient) { }
 
