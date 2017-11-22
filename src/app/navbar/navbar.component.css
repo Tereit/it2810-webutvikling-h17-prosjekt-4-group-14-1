@@ -3,7 +3,7 @@
 
 
 img{
-    width: 30%;
+    width: 100px;
 }
 .navbar{
     color: white;
@@ -19,7 +19,6 @@ h1, p {
 .navbar-brand {
     font-family: 'Lato', sans-serif;
     color: white;
-    margin-right: 60%;
 }
 
 /*Link names on navbar*/
@@ -27,4 +26,9 @@ h1, p {
     font-family: 'Lato', sans-serif;
     color: white;
     font-size: 20px;
+    background-color: blue;
+}
+
+.navbar-nav {
+  background-color: grey;
 }
