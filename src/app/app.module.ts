@@ -27,8 +27,6 @@ import { SearchComponent } from './search/search.component';
 import { SongViewComponent } from './songview/songview.component';
 import { Top50Component } from './top50/top50.component';
 import { ArtistComponent } from './artist/artist.component';
-import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
 import { SongComponent } from './song/song.component';
 import { WordcloudComponent } from './wordcloud/wordcloud.component';
 import { CallbackComponent } from './callback/callback.component';
