@@ -1,3 +1,5 @@
+import {environment} from '../../environments/environment';
+
 interface AuthConfig {
   clientID: string;
   domain: string;
@@ -7,5 +9,5 @@ interface AuthConfig {
 export const AUTH_CONFIG: AuthConfig = {
   clientID: 'seGdd26eZhvfBHv7S4LXTqMjMNplRBRC',
   domain: 'henribos.eu.auth0.com',
-  callbackURL: 'http://localhost:8084/callback'
+  callbackURL: environment.auth_url
 };
