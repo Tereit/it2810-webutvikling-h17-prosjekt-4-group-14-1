@@ -15,6 +15,10 @@ export class ArtistService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * @description will get all artists currently in our database
+   * @returns {array} array of all the artists in the database
+   */
   getAllArtists(): Observable<Artist[]> {
     return this.http.get(this.artist_url).map(res => {
       console.log('Getting all artists...');
@@ -22,38 +26,27 @@ export class ArtistService {
     });
   }
 
+  /**
+   * @description tries to match with a specificly named artist
+   * @param {string} name name of the artists to be retreived
+   * @returns {array} array of all artists that matched the query
+   */
   getArtist(name: string): Observable<Artist[]> {
     return this.http.get(this.artist_url + name).map(res => {
       console.log('Getting artist: ' + name);
-      /*for (let artist in res) {
-          this.getInfo(res[artist].mbid).map(data =>{
-            console.log(data);
-          });
-      }*/
-
       return res as Artist[];
-
     });
   }
 
+  /**
+   * @description gets extra information about a specific artist from lastFM
+   * @param {string} mbid the lastFM id of the artist
+   * @returns {array} resulting information from the query to lastFM
+   */
   getInfo(mbid: string): Observable<any> {
     return this.http.get(this.getInfo_url + mbid).map(res => {
       console.log('Getting info for MBID: ' + mbid);
       return res as Object[];
-    });
-  }
-
-  createArtist(artist: Artist): Observable<any> {
-    return this.http.post(`${this.artist_url}`, artist).map(res => {
-      console.log('Attempting to create artist: ' + artist);
-      return res as Artist[];
-    });
-  }
-
-  updateArtist(artist: Artist) {
-    return this.http.put(this.artist_url + artist._id, artist).map(res => {
-      console.log('Attempting to update artist...');
-      return res as Artist;
     });
   }
 }
