@@ -15,10 +15,11 @@ h1, p {
     display: flex;
 }
 
-/*AppName on navbar*/
+/*LOGO on navbar*/
 .navbar-brand {
     font-family: 'Lato', sans-serif;
     color: white;
+    margin-right: 5%;
 }
 
 /*Link names on navbar*/
@@ -31,4 +32,5 @@ h1, p {
 
 .navbar-nav {
   background-color: grey;
+  margin-left: 5%;
 }
