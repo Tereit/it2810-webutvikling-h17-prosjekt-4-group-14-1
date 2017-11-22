@@ -9,4 +9,6 @@ import {MatMenu} from '@angular/material/menu';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  public isCollapsed = true;
+}
