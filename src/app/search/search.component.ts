@@ -71,6 +71,9 @@ export class SearchComponent implements OnInit {
                     }
                 }
             });
+            this.filterList.sort((n1, n2): number => {
+                return n1.toLowerCase().localeCompare(n2.toLowerCase());
+            });
             this.unfilteredSearchResult = tempData;
             this.currentFilters = this.selectedFilters;
             this.artistSearchResult = this.sortResults(this.filterSearch(tempData));
@@ -101,14 +104,7 @@ export class SearchComponent implements OnInit {
             });
         } else if (this.currentSortValue !== '') {
             tempData.sort((n1, n2): number => {
-                if (n1[this.currentSortValue] > n2[this.currentSortValue]) {
-                    return 1;
-                }
-                if (n1[this.currentSortValue] < n2[this.currentSortValue]) {
-                    return -1;
-                } else {
-                    return 0;
-                }
+                return n1['name'].toLowerCase().localeCompare(n2['name'].toLowerCase());
             });
         }
         return tempData;
