@@ -1,16 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ArtistComponent } from '../artist/artist.component';
-@Component({
-  selector: 'app-artistview',
-  templateUrl: './artistview.component.html',
-  styleUrls: ['./artistview.component.css'],
-})
-export class ArtistViewComponent {
-  artistDialogRef: MatDialogRef<ArtistComponent>;
-  constructor(private dialog: MatDialog) { }
+import { Artist } from '../models/artist.model';
 
-  clickMe(tall) {
-    this.artistDialogRef = this.dialog.open(ArtistComponent, {data: {number: tall}});
+@Component({
+    selector: 'app-artistview',
+    templateUrl: './artistview.component.html',
+    styleUrls: ['./artistview.component.css']
+})
+
+export class ArtistViewComponent {
+  @Input() artist: Artist = null;
+  artistDialogRef: MatDialogRef<ArtistComponent>;
+  artistInfo: string;
+  artistPop: string;
+  artistGenres: string[];
+  newArtist: Artist = null;
+
+  constructor(private dialog: MatDialog) {}
+  clickMe() {
+    this.artistDialogRef = this.dialog.open(ArtistComponent, {data: this.artist});
   }
 }

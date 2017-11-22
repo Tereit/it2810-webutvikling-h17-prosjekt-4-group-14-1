@@ -1,0 +1,15 @@
+.mat-card-wrapper{
+  border: 2px solid black;
+}
+.mat-card{
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+  padding: 0;
+  margin: -5%;
+
+
+}
+.artistview{
+  width: 100%;
+}

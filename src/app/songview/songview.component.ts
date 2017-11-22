@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
-import {ArtistViewComponent} from '../artistview/artistview.component';
-import {MatDialog} from '@angular/material';
+import {Component, Input} from '@angular/core';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {Song} from '../models/song.model';
+import {SongComponent} from '../song/song.component';
 
 @Component({
   selector: 'app-songview',
@@ -8,14 +9,11 @@ import {MatDialog} from '@angular/material';
   styleUrls: ['./songview.component.css']
 })
 export class SongViewComponent {
-  constructor(private dialog: MatDialog) { }
-  clickMe(){
-    const dialogRef = this.dialog.open(ArtistViewComponent, {
-      height: '350px'
-    });
+  @Input() song: Song = null;
+  songDialogRef: MatDialogRef<SongComponent>;
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  constructor(private dialog: MatDialog) { }
+  clickMe() {
+    this.songDialogRef = this.dialog.open(SongComponent, {data: this.song});
   }
 }
