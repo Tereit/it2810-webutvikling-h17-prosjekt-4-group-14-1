@@ -15,7 +15,7 @@ Our “fancy view” is a word cloud that shows the artists in our database and 
 Our system also has the opportunity to create a user and log in. By doing this, our search-engine will remember the user’s latest search.
 
 
-**Further information on how we solved the project requirements can be found in Documentation.pdf**
+**Further information on how we solved the project requirements can be found in [Documentation](Documentation.pdf)**
 
 
 # Instructions (how to open our site)  
