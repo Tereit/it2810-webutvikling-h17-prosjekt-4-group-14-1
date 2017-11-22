@@ -17,10 +17,10 @@ export class WordcloudComponent implements OnInit {
 
   getArtist(): void {
       this.artistService.getAllArtists().subscribe(data => {
-        let s = 1;
+
         for(let item in data) {
-          this.word_cloud.push({size: s, text: data[item].name});
-          s++;
+          this.word_cloud.push({size: data[item].popularity, text: data[item].name});
+          
         }
         //data[item].popularity
           //this.artistSearchResult = data;
