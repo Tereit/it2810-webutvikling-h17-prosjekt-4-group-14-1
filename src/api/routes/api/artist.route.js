@@ -117,13 +117,16 @@ function getInfo(results){
     lfm.artist.getInfo({mbid: results.mbid, api_key: api_key}, function(err, resp){
       if (err) {
         return reject(err);
-      } return resolve({
+      } 
+      var genres = [];
+      resp.tags.tag.forEach(item => genres.push(item.name));
+      return resolve({
             'name': results.name,
             'mbid': results.mbid,
             'img': resp.image[3]['#text'],
             'info': resp.bio.content,
             'popularity': parseInt(resp.stats.listeners, 10),
-            'genres': resp.tags
+            'genres': genres
           });
         });
       });
@@ -153,7 +156,7 @@ function getArtistFromLFM(artistName, results, callback){
     var data = response.artistmatches.artist;
     for (var i = 0; i < data.length; i++) {
       if (data[i].mbid.length <= 0) continue;
-      // if (data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
+      if (data[i].name.includes('feat.') || data[i].name.includes('Feat.') || data[i].name.includes('&')) continue;
       result = {
         'name': data[i].name,
         'mbid': data[i].mbid,
