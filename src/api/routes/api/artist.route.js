@@ -22,13 +22,17 @@ router.get('/', function(req, res){
 router.get('/:artist', function(req, res){
   let name = req.params.artist;
   let mbids = [];
+  let localResults = [];
   getFromDB(name).then(function(resultFromDB){
     for (var key in resultFromDB) {
+      localResults.push(resultFromDB[key]);
       mbids.push(resultFromDB[key].mbid);
     }
-    if (mbids.length > 0) {
+    if (mbids.length > 1) {
+      console.log('Results from DB');
       res.send(resultFromDB);
     } else {
+      console.log('Results from LFM');
       let results = [];
       getArtistFromLFM(name, results, function(data){
         saveArtist(data);
@@ -108,28 +112,14 @@ router.delete('/:id', function(req, res){
   });
 });
 
-router.get('/info/:mbid', function(req, res){
-  let mbid = req.params.mbid;
-  let results = [];
-  lfm.artist.getInfo({mbid: mbid, api_key: api_key}, function(err, response){
-    if (err) {
-      console.log(err);
-      return null;
-    } else {
-      results.push(response);
-      res.send(results);
-    }
-  });
-});
-
 function getInfo(results){
   return new Promise(function(resolve, reject){
     lfm.artist.getInfo({mbid: results.mbid, api_key: api_key}, function(err, resp){
       if (err) {
         return reject(err);
       } return resolve({
-            'name': resp.name,
-            'mbid': resp.mbid,
+            'name': results.name,
+            'mbid': results.mbid,
             'img': resp.image[3]['#text'],
             'info': resp.bio.content,
             'popularity': resp.stats.listeners,
@@ -163,7 +153,7 @@ function getArtistFromLFM(artistName, results, callback){
     var data = response.artistmatches.artist;
     for (var i = 0; i < data.length; i++) {
       if (data[i].mbid.length <= 0) continue;
-      if (data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
+      // if (data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
       result = {
         'name': data[i].name,
         'mbid': data[i].mbid,
@@ -194,15 +184,4 @@ function saveArtist(artists){
   }
 }
 
-function MBIDchecker(artist, callback){
-  resultList = [];
-  for (var artist in artists) {
-    Artist.find({mbid: artists[artist].mbid}, function(err, result) {
-      result.forEach(item => {
-        console.log(item.mbid);
-        resultList.push(item.mbid);
-      });
-    });
-  }
-}
 module.exports = router;
