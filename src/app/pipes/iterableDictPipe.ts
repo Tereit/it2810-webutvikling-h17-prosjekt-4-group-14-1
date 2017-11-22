@@ -4,6 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'IterableDictPipe'
 })
 
+/**
+ * @description makes it possible to use a dictionary with ngFor
+ */
 export class IterableDictPipe implements PipeTransform {
     transform(value: any, args: any[] = null): any {
         return Object.keys(value).map(key => {
