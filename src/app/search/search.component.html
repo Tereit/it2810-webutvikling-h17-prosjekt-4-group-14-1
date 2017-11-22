@@ -17,11 +17,11 @@
       </mat-select>
     </mat-form-field>
     <!-- selecting filters -->
-    <mat-form-field class="genre" *ngIf="filterList.length > 0">
-      <mat-select placeholder="Filter by genre: " [formControl]="filterSelect" multiple [(ngModel)]="selectedFilters" (selectionChange)="changedFilter($event)">
-        <mat-option *ngFor="let filter of filterList" [value]="filter">{{filter}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field *ngIf="filterList.length > 0; else disabled">
+        <mat-select placeholder="Filter by genre: " [formControl]="filterSelect" multiple [(ngModel)]="selectedFilters" (selectionChange)="changedFilter($event)">
+          <mat-option *ngFor="let filter of filterList" [value]="filter">{{filter}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     <mat-form-field class="minPopFilter">
       <input matInput placeholder="Minimum popularity" (change)="filterByPop($event)">
     </mat-form-field>
@@ -51,3 +51,11 @@
     </mat-grid-list>
   </div>
 </div>
+
+
+<ng-template #disabled>
+  <mat-form-field class="genre">
+    <mat-select placeholder="Filter by genre: " disabled>
+    </mat-select>
+  </mat-form-field>
+</ng-template>
