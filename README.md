@@ -2,7 +2,7 @@
 
 ## Introduction  
 
-In this project, we have build a music-search-engine with Angular 5. It searches a local database for artists, and if there are no results, it searches lastFM and stores the results in our own database. By doing this, the user will help us build the database to contain queries that are frequently searched for.
+In this project, we have built a music-search-engine with Angular 5. It searches a local database for artists, and if there are no results, it searches lastFM and stores the results in our own database. By doing this, the user will help us build the database to contain queries that are frequently searched for.
 
 The front page consists of three playlist covers that each will direct you to a new page that shows top 50 songs. The front page also has a navbar that will direct you to a search page, log in and a word cloud.
 
