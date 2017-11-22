@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AgWordCloudModule } from 'angular4-word-cloud';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -27,6 +28,7 @@ import { ArtistComponent } from './artist/artist.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { SongComponent } from './song/song.component';
+import { WordcloudComponent } from './wordcloud/wordcloud.component';
 
 // services
 import { ArtistService } from './services/artist.service';
@@ -48,6 +50,7 @@ const appRoutes: Routes = [
   {path: 'search', component: SearchComponent},
   {path: 'signup', component: SignupComponent },
   {path: 'login', component: LoginComponent},
+  {path: 'wordcloud', component: WordcloudComponent},
 ];
 
 @NgModule({
@@ -63,7 +66,8 @@ const appRoutes: Routes = [
     ArtistComponent,
     SongComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    WordcloudComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -84,6 +88,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     InfiniteScrollModule,
     AngularFontAwesomeModule,
+    AgWordCloudModule.forRoot(),
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule

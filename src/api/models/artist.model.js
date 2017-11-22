@@ -4,7 +4,10 @@ var mongoose = require('mongoose');
 var artistSchema = new mongoose.Schema({
   name: String,
   mbid: String,
-  img: String
+  img: String,
+  info: String,
+  genres: [],
+  popularity: String
 });
 
 // artistSchema.plugin(mongoosePaginate);
