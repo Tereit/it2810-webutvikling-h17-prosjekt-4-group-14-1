@@ -9,6 +9,7 @@
       <h3 class="nickname">{{ profile?.nickname }}</h3>
     </div>
     <pre class="full-profile">{{ profile | json }}</pre>
+    <p>Search History: {{searchHistory}}</p>
     <a (click)="auth.logout()">Logout</a>
   </div>
 </div>

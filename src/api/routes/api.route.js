@@ -1,12 +1,12 @@
-var express = require('express');
+const express = require('express');
 
-var router = express.Router();
-var artist = require('./api/artist.route');
-var lfm    = require('./api/lfm.route');
-// var auth   = require('./authentication.route');
+const router = express.Router();
+const artist = require('./api/artist.route');
+const lfm    = require('./api/lfm.route');
+const user = require('./api/user.route');
 
 router.use('/artist', artist);
 router.use('/lfm', lfm);
-// router.use('/auth', auth);
+router.use('/user', user);
 
 module.exports = router;

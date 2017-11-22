@@ -38,6 +38,7 @@ import {ProfileComponent} from './profile/profile.component';
 import { ArtistService } from './services/artist.service';
 import { SongService } from './services/song.service';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 import { AuthGuardService } from './services/authGuard.service';
 
 // pipes
@@ -110,7 +111,7 @@ const appRoutes: Routes = [
     ArtistComponent,
     SongComponent
   ],
-  providers: [ArtistService, SongService, AuthService, AuthGuardService],
+  providers: [ArtistService, SongService, AuthService, AuthGuardService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

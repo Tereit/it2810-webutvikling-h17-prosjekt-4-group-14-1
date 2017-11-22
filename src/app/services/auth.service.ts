@@ -24,6 +24,10 @@ export class AuthService {
       logo: '../assets/images/logo2.png',
       title: 'Sign In'
     },
+    languageDictionary: {
+      title: 'Log In'
+    },
+    allowShowPassword: true,
     connections: ['Username-Password-Authentication'],
   });
 

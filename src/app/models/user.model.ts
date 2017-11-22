@@ -1,10 +1,10 @@
 export class User {
   name          : string;
-  searchResults : string[];
+  search : string;
 
   constructor(){
     this.name          = '';
-    this.searchResults = [];
+    this.search = '';
   }
 }
 
