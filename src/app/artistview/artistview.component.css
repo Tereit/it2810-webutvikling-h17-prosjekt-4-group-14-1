@@ -1,19 +1,40 @@
-.gridlist {
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  align-items: flex-start;
+.mat-card-wrapper{
+  border: 2px solid black;
 }
+.mat-card{
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+  padding: 0;
+  margin: -5%;
 
-.tile {
-  background: lightblue;
-  min-width: 200px;
-}
-
-.artistview {
-  margin-top: 200px;
-}
-
-.infinitescrollDiv {
 
 }
+.artistview{
+  width: 100%;
+}
+
+
+
+
+
+/*
+.md-card-wrapper{
+  position: relative;
+  width: 100%;
+  height: 800px;
+  border: 2px solid black;
+}
+img{
+  height: 400px;
+  width: 100%;
+}
+
+span{
+  position: absolute;
+  top: 20%;
+
+  color: white;
+  font-size: 16px;
+}
+*/

@@ -1,10 +1,24 @@
 <div class="wrap">
     <div class="search">
-       <input type="text" class="searchTerm" placeholder="Search artist, song, etc." (keyup)="onKey($event)">
+       <input type="text" class="searchTerm" placeholder="Search artist" (keyup)="onKey($event)">
        <button type="submit" class="searchButton" (click)="getArtist()">
          <i class="material-icons">search</i> <!-- Search-icon -->
        </button>
     </div>
+    <!-- selecting what to sort by -->
+    <mat-form-field>
+      <mat-select placeholder="Sort by: " [(ngModel)]="selectedSortValue" (selectionChange)="changedSort($event)">
+        <mat-option *ngFor="let item of sortItems" [value]="item.value">
+          {{ item.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- selecting filters -->
+    <mat-form-field>
+      <mat-select placeholder="Filter: " [formControl]="filterSelect" multiple [(ngModel)]="selectedFilters" (selectionChange)="changedFiler($event)">
+        <mat-option *ngFor="let filter of filterList" [value]="filter">{{filter}}</mat-option>
+      </mat-select>
+    </mat-form-field>    
 </div>
 <div class="artistview" (window:resize)="onResize($event)">
   <div class="infinitescrollDiv"
@@ -12,10 +26,11 @@
     [infiniteScrollDistance]="0.9"
     [infiniteScrollThrottle]="500"
     (scrolled)="onScroll()">
-    <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight="1:1">
-      <mat-grid-tile class="tile" *ngFor="let artist of artistSearchResult | IterableDictPipe | slice:0:limit"> <app-artistview [artist]=artist.value></app-artistview>
+    <mat-grid-list  class="gridlist" cols="{{column}}" rowHeight=300px>
+      <mat-grid-tile class="tile" *ngFor="let artist of artistSearchResult | IterableDictPipe | slice:0:limit">
         <div class="animation"[@Animation]='state' (scrolled)="animateMe()">
-            <div class="artistcontent">{{artist.name}}</div>
+          <mat-grid-tile-header>{{artist.value.name}}</mat-grid-tile-header>
+          <app-artistview [artist]=artist.value></app-artistview>
         </div>
       </mat-grid-tile>
     </mat-grid-list>
