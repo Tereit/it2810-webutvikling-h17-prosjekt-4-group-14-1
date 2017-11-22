@@ -26,6 +26,8 @@ import { FormControl } from '@angular/forms';
 export class SearchComponent implements OnInit {
     value = '';
     artistSearchResult: Artist[] = [];
+    unfilteredSearchResult: Artist[] = [];
+    minPopValue: number = 0;
 
     // list of options for the sortBy field
     sortItems = [
@@ -39,9 +41,9 @@ export class SearchComponent implements OnInit {
 
     // filter selection
     filterSelect = new FormControl();
-    filterList = ['Rock', 'Pop', 'Rap'];
+    filterList: string[] = [];
     // default filter values
-    selectedFilters = ['Rock', 'Pop', 'Rap'];
+    selectedFilters: string[] = [];
     currentFilters: string[];
 
     state: 'small';
@@ -54,26 +56,39 @@ export class SearchComponent implements OnInit {
     constructor(private artistService: ArtistService) {}
 
     getArtist(): void {
+        let tempData = [];
+        this.currentFilters = [];
         this.artistService.getArtist(this.value).subscribe(data => {
-            if (this.currentSortValue !== '') {
-                console.log('sorting...');
-                console.log(data);
-                data.sort((n1, n2): number => {
-                    if (n1[this.selectedSortValue] > n2[this.selectedSortValue]) {
-                        return 1;
-                    }
-                    if (n1[this.selectedSortValue] < n2[this.selectedSortValue]) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                });
-                console.log('done sorting');
-                console.log(data);
-                this.artistSearchResult = data;
-            } else {
-                this.artistSearchResult = data;
+            let allGenres = [];
+            for (let key in data) {
+                tempData.push(data[key]);
             }
+            // populates the list of filters
+            tempData.forEach(item => {
+                for (let i = 0; i < item.genres.length; i++) {
+                    if (!this.findOne(this.filterList, [item.genres[i]])) {
+                        this.filterList.push(item.genres[i]);
+                    }
+                }
+            });
+            this.filterList.sort((n1, n2): number => {
+                return n1.toLowerCase().localeCompare(n2.toLowerCase());
+            });
+            this.unfilteredSearchResult = tempData;
+            this.currentFilters = this.selectedFilters;
+            this.artistSearchResult = this.sortResults(this.filterSearch(tempData));
+        });
+    }
+
+    /**
+     * @description determine if an array contains one or more items from another array.
+     * @param {array} haystack the array to search.
+     * @param {array} arr the array providing items to check for in the haystack.
+     * @return {boolean} true|false if haystack contains at least one item from arr.
+     */
+    findOne(haystack, arr) {
+        return arr.some(function (v) {
+            return haystack.indexOf(v) >= 0;
         });
     }
 
@@ -82,21 +97,42 @@ export class SearchComponent implements OnInit {
         this.getArtist();
     }
 
-    changedFiler(event) {
-        this.currentFilters = event.value;
+    sortResults(tempData) {
+        if (this.currentSortValue === 'popularity') {
+            tempData.sort((n1, n2): number => {
+                return n2.popularity - n1.popularity;
+            });
+        } else if (this.currentSortValue !== '') {
+            tempData.sort((n1, n2): number => {
+                return n1['name'].toLowerCase().localeCompare(n2['name'].toLowerCase());
+            });
+        }
+        return tempData;
     }
 
-    sortBy(name) {
-        this.artistSearchResult.sort((n1, n2): number => {
-            if (n1[name] > n2[name]) {
-                return 1;
-            }
-            if (n1[name] < n2[name]) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
+    filterByPop(event) {
+        this.minPopValue = event.target.value;
+        this.filterSearch();
+    }
+
+    filterSearch(tempData = null) {
+        if (tempData != null) {
+            if (this.currentFilters.length < 1) { return tempData; }
+            return tempData.filter(artist => this.findOne(this.currentFilters, artist.genres))
+                .filter(artist => artist.popularity > this.minPopValue);
+        }
+        if (this.currentFilters.length < 1) {
+            this.artistSearchResult = this.unfilteredSearchResult.filter(artist => artist.popularity > this.minPopValue);
+        } else {
+            this.artistSearchResult = this.unfilteredSearchResult
+                .filter(artist => this.findOne(this.currentFilters, artist.genres))
+                .filter(artist => artist.popularity > this.minPopValue);
+        }
+    }
+
+    changedFilter(event) {
+        this.currentFilters = event.value;
+        this.filterSearch();
     }
 
     onKey(event: any) {

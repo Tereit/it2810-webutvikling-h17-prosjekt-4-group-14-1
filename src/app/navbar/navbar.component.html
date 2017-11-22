@@ -1,14 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #5E0303">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #5E0303">
   <div class="container">
     <a href="#" class="navbar-brand">
       <img src="assets/images/logo2.png">
     </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-          aria-expanded="false" aria-label="Toggle Navigation" name="button">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse"
+          aria-expanded="false" aria-label="Toggle Navigation" name="button"  style="float: right">
           <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse" [ngbCollapse]="isCollapsed">
+          <ul class="navbar-nav">
               <li class="nav-item active">
                   <a routerLink="/" class="nav-link">
                       home
