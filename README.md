@@ -21,7 +21,7 @@ Our system also has the opportunity to create a user and log in. By doing this, 
 
 
 # Instructions (how to open our site)  
-**There is a known bug where the app opens a new tab the first time the navbar is used.**
+**There is a known bug where the app opens a new tab the first time the navbar is used.**  
 If you don't have angular/cli installed, enter the following into your terminal `npm i -g @angular/cli` and hit enter.
 Once this is done, run `npm install` and wait for the process to finish.
 
