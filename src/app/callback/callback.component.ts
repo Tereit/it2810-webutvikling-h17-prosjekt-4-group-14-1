@@ -9,8 +9,6 @@ export class CallbackComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log('Reached Callback');
-  }
+  ngOnInit() {}
 
 }
