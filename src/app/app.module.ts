@@ -71,8 +71,6 @@ const appRoutes: Routes = [
     Top50Component,
     ArtistComponent,
     SongComponent,
-    SignupComponent,
-    LoginComponent,
     WordcloudComponent,
     CallbackComponent,
     ProfileComponent
