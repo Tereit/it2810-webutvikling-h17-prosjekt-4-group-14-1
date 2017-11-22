@@ -14,7 +14,7 @@
       </mat-select>
     </mat-form-field>
     <!-- selecting filters -->
-    <mat-form-field>
+    <mat-form-field *ngIf="filterList.length > 0">
       <mat-select placeholder="Filter by genre: " [formControl]="filterSelect" multiple [(ngModel)]="selectedFilters" (selectionChange)="changedFilter($event)">
         <mat-option *ngFor="let filter of filterList" [value]="filter">{{filter}}</mat-option>
       </mat-select>
