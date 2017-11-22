@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:100');
 
-
+a{
+  cursor: pointer;
+}
 
 img{
     width: 100px;
