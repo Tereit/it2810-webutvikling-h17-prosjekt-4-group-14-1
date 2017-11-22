@@ -13,6 +13,9 @@ export class SongViewComponent {
   songDialogRef: MatDialogRef<SongComponent>;
 
   constructor(private dialog: MatDialog) { }
+  /**
+   * @description opens a dialog with additional information about this song
+   */
   clickMe() {
     this.songDialogRef = this.dialog.open(SongComponent, {data: this.song});
   }

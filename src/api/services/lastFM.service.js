@@ -20,7 +20,7 @@ exports.getArtist = function(request, response) {
         var results = [];
         for(var i = 0; i < data.length; i++) {
             if(data[i].mbid.length <= 0) continue;
-            if(data[i].name.includes('feat.') || data[i].name.includes('Feat.')) continue;
+            if(data[i].name.includes('feat.') || data[i].name.includes('Feat.') || data[i].name.includes('&')) continue;
             result = {
                 'name': data[i].name,
                 'mbid': data[i].mbid,

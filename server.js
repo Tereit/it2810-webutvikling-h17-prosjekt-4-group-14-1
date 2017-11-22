@@ -36,9 +36,10 @@ app.use('/api', api);
 
 app.use("/", express.static(__dirname + '/'));
 app.use("/", express.static(__dirname + '/dist'));
-// app.use("/", express.static(__dirname + '/api'));
 
-app.get('/', (req, res) => res.sendFile('./dist/index.html'));
+app.use('/*',function(req, res) {
+    res.sendfile(__dirname + '/dist/index.html');
+});
 
 app.listen(port);
 console.log('Server running on port: ', port);

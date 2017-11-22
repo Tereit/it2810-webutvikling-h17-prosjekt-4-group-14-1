@@ -15,6 +15,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AgWordCloudModule } from 'angular4-word-cloud';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 // components
@@ -30,10 +31,15 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { SongComponent } from './song/song.component';
 import { WordcloudComponent } from './wordcloud/wordcloud.component';
+import { CallbackComponent } from './callback/callback.component';
+import {ProfileComponent} from './profile/profile.component';
 
 // services
 import { ArtistService } from './services/artist.service';
 import { SongService } from './services/song.service';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { AuthGuardService } from './services/authGuard.service';
 
 // pipes
 import { IterableDictPipe } from './pipes/iterableDictPipe';
@@ -52,6 +58,9 @@ const appRoutes: Routes = [
   {path: 'signup', component: SignupComponent },
   {path: 'login', component: LoginComponent},
   {path: 'wordcloud', component: WordcloudComponent},
+  {path: 'profile', canActivate:[AuthGuardService], component: ProfileComponent},
+  {path: 'callback', component: CallbackComponent},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
@@ -69,6 +78,8 @@ const appRoutes: Routes = [
     SignupComponent,
     LoginComponent,
     WordcloudComponent,
+    CallbackComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -93,13 +104,14 @@ const appRoutes: Routes = [
     AgWordCloudModule.forRoot(),
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule
   ],
   entryComponents: [
     ArtistComponent,
     SongComponent
   ],
-  providers: [ArtistService, SongService],
+  providers: [ArtistService, SongService, AuthService, AuthGuardService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
