@@ -1,15 +1,27 @@
-<div class="panel panel-default profile-area">
+<div class="panel panel-default profile-area" id="panel">
   <div class="panel-heading">
     <h3>Profile</h3>
   </div>
   <div class="panel-body">
+    <div class="panel-elements">
     <img src="{{profile?.picture}}" class="avatar" alt="avatar">
-    <div>
-      <label><i class="glyphicon glyphicon-user"></i> Nickname</label>
+
+      <div class="profiletext">
+      <label><i class="glyphicon glyphicon-user"></i></label>
       <h3 class="nickname">{{ profile?.nickname }}</h3>
     </div>
-    <pre class="full-profile">{{ profile | json }}</pre>
-    <p>Search History: {{searchHistory}}</p>
-    <a (click)="auth.logout()">Logout</a>
+    <p class="scrollboxHeader">Search History</p>
+    <div class="scroll-box">
+
+
+      <li *ngFor="let result of searchHistory">
+          <p>{{result}}</p>
+      </li>
+    </div>
+
+
+    <button><a (click)="auth.logout()">Logout</a></button>
+
+    </div>
   </div>
 </div>
