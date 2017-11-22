@@ -21,11 +21,11 @@ export class AuthService {
     },
     theme: {
       primaryColor: '#5E0303',
-      logo: '../assets/images/logo2.png',
+      logo: '../assets/images/logo_red.png',
       title: 'Sign In'
     },
     languageDictionary: {
-      title: 'Log In'
+      title: ' '
     },
     allowShowPassword: true,
     connections: ['Username-Password-Authentication'],
