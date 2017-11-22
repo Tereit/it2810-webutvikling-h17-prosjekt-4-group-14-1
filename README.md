@@ -24,4 +24,4 @@ Once this is done, run `npm install` and wait for the process to finish.
 
 Make sure you have mongodb installed on your computer, if not, please refer to https://docs.mongodb.com/manual/installation/#tutorials in order to install it on your operating system.
 
-Once everything is installed and mongodb is running on your machine, type `node server.js` to start the application. Now the app is available on http://localhost:8084.
+Once everything is installed and mongodb is running on your machine, type `ng build` to build the project. This might take some time, so just be patient :). When finished, type `node servjer.js` to start the application. Now the app is available on http://localhost:8084.
