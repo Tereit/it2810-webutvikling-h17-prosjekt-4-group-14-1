@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Rx';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';

@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Song} from '../models/song.model';
 import {MatGridListModule} from '@angular/material/grid-list';
