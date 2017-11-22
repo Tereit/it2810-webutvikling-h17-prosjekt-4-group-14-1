@@ -1,15 +1,16 @@
 import Artist from '../models/artist.model';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Rx';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
+import {environment} from '../../environments/environment';
 
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ArtistService {
 
-  api_url     = 'http://localhost:8084/api';
+  api_url     = environment.api_url;
   artist_url  = this.api_url + '/artist/';
   getInfo_url = this.api_url + '/artist/info/';
 
