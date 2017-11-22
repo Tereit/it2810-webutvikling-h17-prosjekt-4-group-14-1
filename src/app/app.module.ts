@@ -15,6 +15,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AgWordCloudModule } from 'angular4-word-cloud';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 // components
 import { AppComponent } from './app.component';
@@ -85,6 +86,7 @@ const appRoutes: Routes = [
     MatGridListModule,
     MatIconModule,
     MatMenuModule,
+    NgbCollapseModule,
     RouterModule.forRoot(appRoutes),
     InfiniteScrollModule,
     AngularFontAwesomeModule,
