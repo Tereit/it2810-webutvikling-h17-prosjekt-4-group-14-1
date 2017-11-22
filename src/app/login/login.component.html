@@ -14,7 +14,7 @@
   		<p class="submit">
   			<button type="submit" name="submit"><i class="fa fa-arrow-right"></i></button>
   		</p>
-        <div (click)="toggle($event)"><h4 *ngIf="login; else logIn">Sign up</h4></div>
+        <div (click)="auth.login()"><h4 *ngIf="login; else logIn">Sign up</h4></div>
   	</form>
   </section>
 </div>

@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatMenu} from '@angular/material/menu';
+import { AuthService } from '../services/auth.service';
 
 /**
  * @title Menu with icons
@@ -7,6 +8,12 @@ import {MatMenu} from '@angular/material/menu';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  providers: [AuthService]
 })
-export class NavbarComponent {}
+export class NavbarComponent implements OnInit{
+  constructor(public auth: AuthService){}
+
+  ngOnInit(){
+  }
+}
