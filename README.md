@@ -2,6 +2,9 @@
 
 ## Introduction  
 
+**There is a known bug where the app opens a new tab the first time the navbar is used.**  
+
+
 In this project, we have built a music-search-engine with Angular 5. It searches a local database for artists, and if there are no results, it searches lastFM and stores the results in our own database. By doing this, the user will help us build the database to contain queries that are frequently searched for.
 
 The front page consists of three playlist covers that each will direct you to a new page that shows top 50 songs. The front page also has a navbar that will direct you to a search page, log in and a word cloud.
@@ -21,7 +24,6 @@ Our system also has the opportunity to create a user and log in. By doing this, 
 
 
 # Instructions (how to open our site)  
-**There is a known bug where the app opens a new tab the first time the navbar is used.**  
 If you don't have angular/cli installed, enter the following into your terminal `npm i -g @angular/cli` and hit enter.
 Once this is done, run `npm install` and wait for the process to finish.
 
