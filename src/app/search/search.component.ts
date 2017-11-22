@@ -26,6 +26,7 @@ import { FormControl } from '@angular/forms';
 export class SearchComponent implements OnInit {
     value = '';
     artistSearchResult: Artist[] = [];
+    unfilteredSearchResult: Artist[] = [];
 
     // list of options for the sortBy field
     sortItems = [
@@ -39,9 +40,9 @@ export class SearchComponent implements OnInit {
 
     // filter selection
     filterSelect = new FormControl();
-    filterList = ['Rock', 'Pop', 'Rap'];
+    filterList: string[] = [];
     // default filter values
-    selectedFilters = ['Rock', 'Pop', 'Rap'];
+    selectedFilters: string[] = [];
     currentFilters: string[];
 
     state: 'small';
@@ -55,56 +56,81 @@ export class SearchComponent implements OnInit {
 
     getArtist(): void {
         let tempData = [];
+        this.currentFilters = [];
         this.artistService.getArtist(this.value).subscribe(data => {
+            let allGenres = [];
             for (let key in data) {
                 tempData.push(data[key]);
             }
-            if (this.currentSortValue === 'popularity') {
-                console.log('sorting by popularity');
-                tempData.sort((n1, n2): number => {
-                    return n2.popularity - n1.popularity;
-                });
-                console.log(tempData);
-            } else if (this.currentSortValue !== '') {
-                console.log('sorting by ' + this.currentSortValue);
-                tempData.sort((n1, n2): number => {
-                    if (n1[this.currentSortValue] > n2[this.currentSortValue]) {
-                        return 1;
+            // populates the list of filters
+            tempData.forEach(item => {
+                // console.log(item.genres);
+                for (let i = 0; i < item.genres.length; i++) {
+                    if (!this.findOne(this.filterList, [item.genres[i]])) {
+                        this.filterList.push(item.genres[i]);
                     }
-                    if (n1[this.currentSortValue] < n2[this.currentSortValue]) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                });
-                console.log(tempData);
-            }
-            this.artistSearchResult = tempData;
+                }
+            });
+            this.unfilteredSearchResult = tempData;
+            this.currentFilters = this.selectedFilters;
+            this.artistSearchResult = this.sortResults(this.filterSearch(tempData));
+        });
+    }
+
+    /**
+     * @description determine if an array contains one or more items from another array.
+     * @param {array} haystack the array to search.
+     * @param {array} arr the array providing items to check for in the haystack.
+     * @return {boolean} true|false if haystack contains at least one item from arr.
+     */
+    findOne(haystack, arr) {
+        return arr.some(function (v) {
+            return haystack.indexOf(v) >= 0;
         });
     }
 
     changedSort(event) {
         this.currentSortValue = event.value;
-        if (this.value.length > 0) {
-            this.getArtist();
+        this.getArtist();
+    }
+
+    sortResults(tempData) {
+        if (this.currentSortValue === 'popularity') {
+            console.log('sorting by popularity');
+            tempData.sort((n1, n2): number => {
+                return n2.popularity - n1.popularity;
+            });
+        } else if (this.currentSortValue !== '') {
+            console.log('sorting by ' + this.currentSortValue);
+            tempData.sort((n1, n2): number => {
+                if (n1[this.currentSortValue] > n2[this.currentSortValue]) {
+                    return 1;
+                }
+                if (n1[this.currentSortValue] < n2[this.currentSortValue]) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+        }
+        return tempData;
+    }
+
+    filterSearch(tempData = null) {
+        if (tempData != null) {
+            if (this.currentFilters.length < 1) { return tempData; }
+            return tempData.filter(artist => this.findOne(this.currentFilters, artist.genres));
+        }
+        if (this.currentFilters.length < 1) {
+            this.artistSearchResult = this.unfilteredSearchResult;
+        } else {
+            this.artistSearchResult = this.unfilteredSearchResult.filter(artist => this.findOne(this.currentFilters, artist.genres));
         }
     }
 
     changedFiler(event) {
         this.currentFilters = event.value;
-    }
-
-    sortBy(name) {
-        this.artistSearchResult.sort((n1, n2): number => {
-            if (n1[name] > n2[name]) {
-                return 1;
-            }
-            if (n1[name] < n2[name]) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
+        this.filterSearch();
     }
 
     onKey(event: any) {

@@ -15,7 +15,7 @@
     </mat-form-field>
     <!-- selecting filters -->
     <mat-form-field>
-      <mat-select placeholder="Filter: " [formControl]="filterSelect" multiple [(ngModel)]="selectedFilters" (selectionChange)="changedFiler($event)">
+      <mat-select placeholder="Filter by genre: " [formControl]="filterSelect" multiple [(ngModel)]="selectedFilters" (selectionChange)="changedFiler($event)">
         <mat-option *ngFor="let filter of filterList" [value]="filter">{{filter}}</mat-option>
       </mat-select>
     </mat-form-field>    
