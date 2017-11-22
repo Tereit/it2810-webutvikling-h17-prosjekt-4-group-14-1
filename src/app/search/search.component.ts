@@ -29,8 +29,9 @@ export class SearchComponent implements OnInit {
 
     // list of options for the sortBy field
     sortItems = [
+        {value: '', viewValue: 'None'},
         {value: 'name', viewValue: 'Name'},
-        {value: 'test', viewValue: 'Test'}
+        {value: 'popularity', viewValue: 'Popularity'}
     ];
     // default sort value
     selectedSortValue: string;
