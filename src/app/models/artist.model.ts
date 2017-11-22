@@ -7,13 +7,16 @@ export class Artist {
   popularity: number;
   genres: Object[];
 
-  constructor() {
-    this.name = '';
-    this.mbid = '';
-    this.img  = '';
-    this.info = '';
-    this.popularity = 0;
-    this.genres  = [];
+  constructor(id = '', name = '',
+    mbid = '', img = '', info = '',
+    popularity = 0, genres = []) {
+    this._id = id;
+    this.name = name;
+    this.mbid = mbid;
+    this.img  = img;
+    this.info = info;
+    this.popularity = popularity;
+    this.genres  = genres;
   }
 
 }
