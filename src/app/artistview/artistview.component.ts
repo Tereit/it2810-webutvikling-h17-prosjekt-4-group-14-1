@@ -12,6 +12,10 @@ import { Artist } from '../models/artist.model';
 export class ArtistViewComponent {
   @Input() artist: Artist = null;
   artistDialogRef: MatDialogRef<ArtistComponent>;
+  artistInfo: string;
+  artistPop: string;
+  artistGenres: string[];
+  newArtist: Artist = null;
 
   constructor(private dialog: MatDialog) {}
   clickMe() {

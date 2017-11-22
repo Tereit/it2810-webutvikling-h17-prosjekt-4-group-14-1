@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
 
     state: 'small';
     // Assigning how many elements that should be displayed in a row
-    column: number = 5;
+    column: number = this.setColumns();
     // List for displaying items in elements
     displayedElements: Artist[] = [];
     // Defines how many elements that should be displayed at a time
@@ -129,20 +129,30 @@ export class SearchComponent implements OnInit {
     // Making grid list responsive
     onResize(event) {
         const element = event.target.innerWidth;
-        if (element > 1050) {
+        if (element > 1500) {
             this.column = 5;
-        }
-        if (element > 950 && element < 1050) {
+        } else if (element > 1200) {
             this.column = 4;
-        }
-        if (element < 850) {
+        } else if (element > 900) {
             this.column = 3;
-        }
-        if (element < 750) {
+        } else if (element > 600) {
             this.column = 2;
-        }
-        if (element < 650) {
+        } else if (element > 300) {
             this.column = 1;
+        }
+    }
+    setColumns(): number {
+        const width = document.documentElement.clientWidth;
+        if (width > 1500) {
+            return 5;
+        } else if (width > 1200) {
+            return 4;
+        } else if (width > 900) {
+            return 3;
+        } else if (width > 600) {
+            return 2;
+        } else if (width > 300) {
+            return 1;
         }
     }
     ngOnInit() {

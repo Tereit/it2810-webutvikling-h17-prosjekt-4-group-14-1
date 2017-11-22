@@ -16,6 +16,7 @@ exports.getArtist = function(request, response) {
             return null;
         }
         var data = res.artistmatches.artist;
+        console.log(data);
         var results = [];
         for(var i = 0; i < data.length; i++) {
             if(data[i].mbid.length <= 0) continue;
@@ -84,4 +85,15 @@ exports.getTop50 = function(request, response) {
         // callback(results);
         response.send(results);
     });
+}
+
+exports.getInfo = function(request, response) {
+  lfm.artist.getInfo({mbid: request.params.mbid, api_key: api_key}, function(err, res){
+    if (err) {
+      console.log(err);
+      return null;
+    } else {
+      return res;
+    }
+  });
 }
