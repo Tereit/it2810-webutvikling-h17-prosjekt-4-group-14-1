@@ -12,6 +12,8 @@ import { MatCardModule } from '@angular/material/card';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // components
 import { AppComponent } from './app.component';
@@ -24,6 +26,7 @@ import { Top50Component } from './top50/top50.component';
 import { ArtistComponent } from './artist/artist.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { SongComponent } from './song/song.component';
 
 // services
 import { ArtistService } from './services/artist.service';
@@ -31,7 +34,6 @@ import { SongService } from './services/song.service';
 
 // pipes
 import { IterableDictPipe } from './pipes/iterableDictPipe';
-import { SongComponent } from './song/song.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -82,6 +84,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     InfiniteScrollModule,
     AngularFontAwesomeModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
     ArtistComponent,

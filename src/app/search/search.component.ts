@@ -3,6 +3,7 @@ import { ArtistService } from '../services/artist.service';
 import { Artist } from '../models/artist.model';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-search',
@@ -26,6 +27,23 @@ export class SearchComponent implements OnInit {
     value = '';
     artistSearchResult: Artist[] = [];
 
+    // list of options for the sortBy field
+    sortItems = [
+        {value: '', viewValue: 'None'},
+        {value: 'name', viewValue: 'Name'},
+        {value: 'popularity', viewValue: 'Popularity'}
+    ];
+    // default sort value
+    selectedSortValue: string;
+    currentSortValue: string = '';
+
+    // filter selection
+    filterSelect = new FormControl();
+    filterList = ['Rock', 'Pop', 'Rap'];
+    // default filter values
+    selectedFilters = ['Rock', 'Pop', 'Rap'];
+    currentFilters: string[];
+
     state: 'small';
     // Assigning how many elements that should be displayed in a row
     column: number = this.setColumns();
@@ -37,16 +55,43 @@ export class SearchComponent implements OnInit {
 
     getArtist(): void {
         this.artistService.getArtist(this.value).subscribe(data => {
-            this.artistSearchResult = data;
+            if (this.currentSortValue !== '') {
+                console.log('sorting...');
+                console.log(data);
+                data.sort((n1, n2): number => {
+                    if (n1[this.selectedSortValue] > n2[this.selectedSortValue]) {
+                        return 1;
+                    }
+                    if (n1[this.selectedSortValue] < n2[this.selectedSortValue]) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                });
+                console.log('done sorting');
+                console.log(data);
+                this.artistSearchResult = data;
+            } else {
+                this.artistSearchResult = data;
+            }
         });
     }
 
-    sortBy() {
+    changedSort(event) {
+        this.currentSortValue = event.value;
+        this.getArtist();
+    }
+
+    changedFiler(event) {
+        this.currentFilters = event.value;
+    }
+
+    sortBy(name) {
         this.artistSearchResult.sort((n1, n2): number => {
-            if (n1.name > n2.name) {
+            if (n1[name] > n2[name]) {
                 return 1;
             }
-            if (n1.name < n2.name) {
+            if (n1[name] < n2[name]) {
                 return -1;
             } else {
                 return 0;
