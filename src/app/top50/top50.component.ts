@@ -26,22 +26,26 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 })
 
 export class Top50Component implements OnInit {
-  state: 'small';
-  // Assigning how many elements that should be displayed in a row
-  column: number = 5;
-  // List for displaying items in elements
-  displayedElements: Song[] = [];
-  // Defines how many elements that should be displayed at a time
-  limit = 15;
+    state: 'small';
+    // Assigning how many elements that should be displayed in a row
+    column: number = 5;
+    // List for displaying items in elements
+    displayedElements: Song[] = [];
+    // Defines how many elements that should be displayed at a time
+    limit = 15;
 
     songs: Song[] = [];
 
     country: string;
     constructor(private route: ActivatedRoute, private router: Router, private songService: SongService) { }
 
+    /**
+     * @description retreives the top 50 songs from the country supplied in the url parameter
+     */
     getTop50Songs(): void {
       this.songService.getTop50(this.country).subscribe(data => {
         this.songs = data;
+        // makes sure the most popular of the top 50 is displayed first
         this.songs.sort((n1, n2) => {
             return parseInt(n2.listeners, 10) - parseInt(n1.listeners, 10);
         });
@@ -51,6 +55,10 @@ export class Top50Component implements OnInit {
     animateMe() {
         this.state = ('small');
     }
+
+    /**
+     * @description adds a new row of artists to be displayed if there's room
+     */
     addItems() {
         for (let i = 0; i < this.songs.length; i++) {
             if (this.songs.length !== this.displayedElements.length) {
@@ -59,7 +67,10 @@ export class Top50Component implements OnInit {
             }
         }
     }
-    // Runs each time you scroll
+
+    /**
+     * @description triggers everytime a scroll event is performed, will increase the amount of artists that are displayed
+     */
     onScroll() {
         // Detects when you reach the bottom, and then adds 5 more results.
         if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
@@ -67,7 +78,11 @@ export class Top50Component implements OnInit {
             this.addItems();
         }
     }
-    // Making grid list responsive
+
+    /**
+     * @description changes the amount of columns used in the grid display
+     * @param event the triggering event
+     */
     onResize(event) {
         const element = event.target.innerWidth;
         if (element > 1500) {

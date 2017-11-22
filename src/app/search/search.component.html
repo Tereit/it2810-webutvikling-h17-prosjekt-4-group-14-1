@@ -5,7 +5,10 @@
          <i class="material-icons">search</i> <!-- Search-icon -->
        </button>
     </div>
+
+
     <!-- selecting what to sort by -->
+<div class="alternativer">
     <mat-form-field>
       <mat-select placeholder="Sort by: " [(ngModel)]="selectedSortValue" (selectionChange)="changedSort($event)">
         <mat-option *ngFor="let item of sortItems" [value]="item.value">
@@ -14,7 +17,7 @@
       </mat-select>
     </mat-form-field>
     <!-- selecting filters -->
-    <mat-form-field>
+    <mat-form-field class="genre" *ngIf="filterList.length > 0">
       <mat-select placeholder="Filter by genre: " [formControl]="filterSelect" multiple [(ngModel)]="selectedFilters" (selectionChange)="changedFilter($event)">
         <mat-option *ngFor="let filter of filterList" [value]="filter">{{filter}}</mat-option>
       </mat-select>
@@ -23,6 +26,15 @@
       <input matInput placeholder="Minimum popularity" (change)="filterByPop($event)">
     </mat-form-field>
 </div>
+
+
+
+</div>
+
+
+
+
+
 <div class="artistview" (window:resize)="onResize($event)">
   <div class="infinitescrollDiv"
     infiniteScroll

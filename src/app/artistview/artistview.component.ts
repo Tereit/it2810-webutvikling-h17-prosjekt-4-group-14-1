@@ -18,6 +18,10 @@ export class ArtistViewComponent {
   newArtist: Artist = null;
 
   constructor(private dialog: MatDialog) {}
+
+  /**
+   * @description opens a dialog with additional information about this artist
+   */
   clickMe() {
     this.artistDialogRef = this.dialog.open(ArtistComponent, {data: this.artist});
   }
