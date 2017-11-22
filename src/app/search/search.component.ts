@@ -27,6 +27,7 @@ export class SearchComponent implements OnInit {
     value = '';
     artistSearchResult: Artist[] = [];
     unfilteredSearchResult: Artist[] = [];
+    minPopValue: number = 0;
 
     // list of options for the sortBy field
     sortItems = [
@@ -64,7 +65,6 @@ export class SearchComponent implements OnInit {
             }
             // populates the list of filters
             tempData.forEach(item => {
-                // console.log(item.genres);
                 for (let i = 0; i < item.genres.length; i++) {
                     if (!this.findOne(this.filterList, [item.genres[i]])) {
                         this.filterList.push(item.genres[i]);
@@ -96,12 +96,10 @@ export class SearchComponent implements OnInit {
 
     sortResults(tempData) {
         if (this.currentSortValue === 'popularity') {
-            console.log('sorting by popularity');
             tempData.sort((n1, n2): number => {
                 return n2.popularity - n1.popularity;
             });
         } else if (this.currentSortValue !== '') {
-            console.log('sorting by ' + this.currentSortValue);
             tempData.sort((n1, n2): number => {
                 if (n1[this.currentSortValue] > n2[this.currentSortValue]) {
                     return 1;
@@ -116,19 +114,27 @@ export class SearchComponent implements OnInit {
         return tempData;
     }
 
+    filterByPop(event) {
+        this.minPopValue = event.target.value;
+        this.filterSearch();
+    }
+
     filterSearch(tempData = null) {
         if (tempData != null) {
             if (this.currentFilters.length < 1) { return tempData; }
-            return tempData.filter(artist => this.findOne(this.currentFilters, artist.genres));
+            return tempData.filter(artist => this.findOne(this.currentFilters, artist.genres))
+                .filter(artist => artist.popularity > this.minPopValue);
         }
         if (this.currentFilters.length < 1) {
-            this.artistSearchResult = this.unfilteredSearchResult;
+            this.artistSearchResult = this.unfilteredSearchResult.filter(artist => artist.popularity > this.minPopValue);
         } else {
-            this.artistSearchResult = this.unfilteredSearchResult.filter(artist => this.findOne(this.currentFilters, artist.genres));
+            this.artistSearchResult = this.unfilteredSearchResult
+                .filter(artist => this.findOne(this.currentFilters, artist.genres))
+                .filter(artist => artist.popularity > this.minPopValue);
         }
     }
 
-    changedFiler(event) {
+    changedFilter(event) {
         this.currentFilters = event.value;
         this.filterSearch();
     }
