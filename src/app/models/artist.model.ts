@@ -4,7 +4,7 @@ export class Artist {
   mbid: string;
   img: string;
   info: string;
-  popularity: string;
+  popularity: number;
   genres: Object[];
 
   constructor() {
@@ -12,7 +12,7 @@ export class Artist {
     this.mbid = '';
     this.img  = '';
     this.info = '';
-    this.popularity = '';
+    this.popularity = 0;
     this.genres  = [];
   }
 

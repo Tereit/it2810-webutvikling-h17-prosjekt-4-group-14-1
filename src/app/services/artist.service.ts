@@ -25,12 +25,11 @@ export class ArtistService {
   getArtist(name: string): Observable<Artist[]> {
     return this.http.get(this.artist_url + name).map(res => {
       console.log('Getting artist: ' + name);
-      for (let artist in res) {
-          console.log(res[artist].mbid);
+      /*for (let artist in res) {
           this.getInfo(res[artist].mbid).map(data =>{
             console.log(data);
           });
-      }
+      }*/
 
       return res as Artist[];
 
@@ -51,10 +50,10 @@ export class ArtistService {
     });
   }
 
-  updateArtist(artist: Artist){
+  updateArtist(artist: Artist) {
     return this.http.put(this.artist_url + artist._id, artist).map(res => {
       console.log('Attempting to update artist...');
       return res as Artist;
-    })
+    });
   }
 }

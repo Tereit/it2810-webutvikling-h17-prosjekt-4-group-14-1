@@ -122,7 +122,7 @@ function getInfo(results){
             'mbid': results.mbid,
             'img': resp.image[3]['#text'],
             'info': resp.bio.content,
-            'popularity': resp.stats.listeners,
+            'popularity': parseInt(resp.stats.listeners, 10),
             'genres': resp.tags
           });
         });

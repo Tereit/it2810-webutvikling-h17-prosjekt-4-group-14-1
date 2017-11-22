@@ -54,32 +54,40 @@ export class SearchComponent implements OnInit {
     constructor(private artistService: ArtistService) {}
 
     getArtist(): void {
+        let tempData = [];
         this.artistService.getArtist(this.value).subscribe(data => {
-            if (this.currentSortValue !== '') {
-                console.log('sorting...');
-                console.log(data);
-                data.sort((n1, n2): number => {
-                    if (n1[this.selectedSortValue] > n2[this.selectedSortValue]) {
+            for (let key in data) {
+                tempData.push(data[key]);
+            }
+            if (this.currentSortValue === 'popularity') {
+                console.log('sorting by popularity');
+                tempData.sort((n1, n2): number => {
+                    return n2.popularity - n1.popularity;
+                });
+                console.log(tempData);
+            } else if (this.currentSortValue !== '') {
+                console.log('sorting by ' + this.currentSortValue);
+                tempData.sort((n1, n2): number => {
+                    if (n1[this.currentSortValue] > n2[this.currentSortValue]) {
                         return 1;
                     }
-                    if (n1[this.selectedSortValue] < n2[this.selectedSortValue]) {
+                    if (n1[this.currentSortValue] < n2[this.currentSortValue]) {
                         return -1;
                     } else {
                         return 0;
                     }
                 });
-                console.log('done sorting');
-                console.log(data);
-                this.artistSearchResult = data;
-            } else {
-                this.artistSearchResult = data;
+                console.log(tempData);
             }
+            this.artistSearchResult = tempData;
         });
     }
 
     changedSort(event) {
         this.currentSortValue = event.value;
-        this.getArtist();
+        if (this.value.length > 0) {
+            this.getArtist();
+        }
     }
 
     changedFiler(event) {
