@@ -10,23 +10,23 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse" [ngbCollapse]="isCollapsed">
           <ul class="navbar-nav">
               <li class="nav-item active">
-                  <a routerLink="/" class="nav-link">
+                  <a data-toggle="collapse" data-target=".nav-collapse" routerLink="/" class="nav-link">
                       home
                       <span class="sr-only">(current)</span>
                   </a>
               </li>
               <li class="nav-item">
-                <a routerLink="/search" class="nav-link">
+                <a data-toggle="collapse" data-target=".nav-collapse" routerLink="/search" class="nav-link">
                     search
                 </a>
               </li>
               <li>
-                <a routerLink="/wordcloud" class="nav-link">
+                <a data-toggle="collapse" data-target=".nav-collapse" routerLink="/wordcloud" class="nav-link">
                   wordcloud
                 </a>
               </li>
               <li class="nav-item">
-                <a routerLink="/login" class="nav-link">
+                <a data-toggle="collapse" data-target=".nav-collapse" routerLink="/login" class="nav-link">
                     login
                 </a>
               </li>
