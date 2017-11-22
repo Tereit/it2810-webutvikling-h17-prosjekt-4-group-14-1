@@ -18,4 +18,6 @@ Our system also has the opportunity to create a user and log in. By doing this, 
 **Further information on how we solved the project requirements can be found in Documentation.pdf**
 
 
-# Instructions (how to open our site)
+# Instructions (how to open our site)  
+If you don't have angular/cli installed, enter the following into your terminal `npm i -g @angular/cli` and hit enter.
+Once this is done, run `npm install` and wait for the process to finish
