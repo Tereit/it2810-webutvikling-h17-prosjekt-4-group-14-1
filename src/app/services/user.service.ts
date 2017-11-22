@@ -2,6 +2,7 @@ import { Observable } from 'rxjs/observable';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
+import {environment} from '../../environments/environment';
 
 import User from '../models/user.model';
 
@@ -10,7 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserService {
 
-  api_url  = 'http://localhost:8084/api/user/';
+  api_url  = environment.api_url;
 
   constructor(private http: HttpClient) { }
 
