@@ -2,31 +2,20 @@
 
 ## Introduction  
 
-In this project, we will be building a music-search-engine. It will search a local database for artists or songs, and if there are no results, it will search lastFM and store the results in our own database. By doing this, the user will help us build the database to contain queries that are frequently searched for.  
+In this project, we have build a music-search-engine. It searches a local database for artists, and if there are no results, it searches lastFM and stores the results in our own database. By doing this, the user will help us build the database to contain queries that are frequently searched for.
 
-## Architecture  
+The front page consists of three playlist covers that each will direct you to a new page that shows top 50 songs. The front page also has a navbar that will direct you to a search page, log in and a word cloud.
 
-For a detailed description of how components work, please check the wiki.  
+The search page has a search input field where you can search for artists. It will first appear at most 15 results, and we have used infinite scroll to retrieve more results. The results can be sorted by artists alphabetically, or by popularity. Also, you can filter by the artists’ genre and a minimum popularity.
 
-#### Frontend  
-The application will be built in Angular v4, running on a nodeJS server. Components are styled using Bootstrap 4.  
+The results from the playlist pages and the search page can be clicked and a pop-up window will show more information about the song/artist.
 
-#### Backend  
-The backend will be based on NodeJS and Express4. We use mongoDB as our database, along with mongoose to make searching easy. There were some problems connecting mongoose directly to angular, so we are creating an API to access the CRUD operations.
-The search functionality and lastFM integration will also be built on the backend server.  
+Our “fancy view” is a word cloud that shows the artists in our database and ranks them based on their popularity on LastFM.
 
-## Data  
-Data for the database are artist and song objects. These will be gathered from lastFM, and stored locally.  
+Our system also has the opportunity to create a user and log in. By doing this, our search-engine will remember the user’s latest search.
 
-## Search feature  
-At the core of the website is our search-function. It will be the first thing the users encounter when they open our website. By using it, the user searches both our own database and lastFMs database.  
 
-#### Filters  
-Since the website searches for both artists and songs, the user will have the ability to filter the results for either aritsts, songs or both.  
+**Further information on how we solved the project requirements can be found in Documentation.pdf**
 
-#### Sorting  
-We will implement sorting-functionality, where you can either sort by number of listeners or alphabetically by name. 
 
-## Planned Design  
-The frontpage will consist of two elements; a search field and a view of pre-made playlists. If the user clicks on one of the playlists, he/she will be redirected to a page containing the playlist.  
-If the user decides to search for something, the results will appear underneath the search field. There will also be options to filter and sort the results.
+# Instructions (how to open our site)
