@@ -64,6 +64,8 @@
 
 .artistview {
   margin-top: 4em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .infinitescrollDiv {
