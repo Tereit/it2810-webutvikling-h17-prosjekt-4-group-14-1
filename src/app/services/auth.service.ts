@@ -25,7 +25,7 @@ export class AuthService {
       title: 'Sign In'
     },
     languageDictionary: {
-      title: 'Log In'
+      title: ' '
     },
     allowShowPassword: true,
     connections: ['Username-Password-Authentication'],
