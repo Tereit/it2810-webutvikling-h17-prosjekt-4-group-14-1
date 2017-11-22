@@ -49,18 +49,4 @@ export class ArtistService {
       return res as Object[];
     });
   }
-
-  createArtist(artist: Artist): Observable<any> {
-    return this.http.post(`${this.artist_url}`, artist).map(res => {
-      console.log('Attempting to create artist: ' + artist);
-      return res as Artist[];
-    });
-  }
-
-  updateArtist(artist: Artist) {
-    return this.http.put(this.artist_url + artist._id, artist).map(res => {
-      console.log('Attempting to update artist...');
-      return res as Artist;
-    });
-  }
 }
