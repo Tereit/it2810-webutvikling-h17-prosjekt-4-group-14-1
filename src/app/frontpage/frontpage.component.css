@@ -1,6 +1,19 @@
 .flex-cont{
     flex-direction: column;
 }
+.mat-card-subtitle{
+}
+.mat-card-title{
+  margin-bottom: -2px;
+}
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+.mat-card{
+  margin-top: -10px;
+}
+
+
 
 /* Use this CSS when width <> 576px */
 @media all and (min-width: 576px){

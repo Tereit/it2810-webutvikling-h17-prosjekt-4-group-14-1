@@ -53,10 +53,8 @@ const appRoutes: Routes = [
   {path: '', component: FrontpageComponent},
   {path: 'top50/:country', component: Top50Component},
   {path: 'search', component: SearchComponent},
-  {path: 'signup', component: SignupComponent },
-  {path: 'login', component: LoginComponent},
   {path: 'wordcloud', component: WordcloudComponent},
-  {path: 'profile', canActivate:[AuthGuardService], component: ProfileComponent},
+  {path: 'profile', canActivate: [AuthGuardService], component: ProfileComponent},
   {path: 'callback', component: CallbackComponent},
   {path: '**', redirectTo: ''}
 ];
