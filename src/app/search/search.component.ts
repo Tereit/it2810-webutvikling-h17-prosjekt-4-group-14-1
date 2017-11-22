@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
 
     state: 'small';
     // Assigning how many elements that should be displayed in a row
-    column: number = 5;
+    column: number = this.setColumns();
     // List for displaying items in elements
     displayedElements: Artist[] = [];
     // Defines how many elements that should be displayed at a time
@@ -54,32 +54,40 @@ export class SearchComponent implements OnInit {
     constructor(private artistService: ArtistService) {}
 
     getArtist(): void {
+        let tempData = [];
         this.artistService.getArtist(this.value).subscribe(data => {
-            if (this.currentSortValue !== '') {
-                console.log('sorting...');
-                console.log(data);
-                data.sort((n1, n2): number => {
-                    if (n1[this.selectedSortValue] > n2[this.selectedSortValue]) {
+            for (let key in data) {
+                tempData.push(data[key]);
+            }
+            if (this.currentSortValue === 'popularity') {
+                console.log('sorting by popularity');
+                tempData.sort((n1, n2): number => {
+                    return n2.popularity - n1.popularity;
+                });
+                console.log(tempData);
+            } else if (this.currentSortValue !== '') {
+                console.log('sorting by ' + this.currentSortValue);
+                tempData.sort((n1, n2): number => {
+                    if (n1[this.currentSortValue] > n2[this.currentSortValue]) {
                         return 1;
                     }
-                    if (n1[this.selectedSortValue] < n2[this.selectedSortValue]) {
+                    if (n1[this.currentSortValue] < n2[this.currentSortValue]) {
                         return -1;
                     } else {
                         return 0;
                     }
                 });
-                console.log('done sorting');
-                console.log(data);
-                this.artistSearchResult = data;
-            } else {
-                this.artistSearchResult = data;
+                console.log(tempData);
             }
+            this.artistSearchResult = tempData;
         });
     }
 
     changedSort(event) {
         this.currentSortValue = event.value;
-        this.getArtist();
+        if (this.value.length > 0) {
+            this.getArtist();
+        }
     }
 
     changedFiler(event) {
@@ -129,20 +137,30 @@ export class SearchComponent implements OnInit {
     // Making grid list responsive
     onResize(event) {
         const element = event.target.innerWidth;
-        if (element > 1050) {
+        if (element > 1500) {
             this.column = 5;
-        }
-        if (element > 950 && element < 1050) {
+        } else if (element > 1200) {
             this.column = 4;
-        }
-        if (element < 850) {
+        } else if (element > 900) {
             this.column = 3;
-        }
-        if (element < 750) {
+        } else if (element > 600) {
             this.column = 2;
-        }
-        if (element < 650) {
+        } else if (element > 300) {
             this.column = 1;
+        }
+    }
+    setColumns(): number {
+        const width = document.documentElement.clientWidth;
+        if (width > 1500) {
+            return 5;
+        } else if (width > 1200) {
+            return 4;
+        } else if (width > 900) {
+            return 3;
+        } else if (width > 600) {
+            return 2;
+        } else if (width > 300) {
+            return 1;
         }
     }
     ngOnInit() {

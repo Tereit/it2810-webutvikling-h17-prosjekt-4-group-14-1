@@ -1,0 +1,9 @@
+<div class="wordcloud" *ngIf="word_cloud.length>0">
+  <div AgWordCloud
+    #word_cloud_chart=ag-word-cloud
+    [wordData]="word_cloud"
+     [options]="options"
+     [width]="1250"
+     [height]="600">
+    </div>
+  </div>

@@ -3,11 +3,17 @@ export class Artist {
   name: string;
   mbid: string;
   img: string;
+  info: string;
+  popularity: number;
+  genres: Object[];
 
   constructor() {
     this.name = '';
     this.mbid = '';
     this.img  = '';
+    this.info = '';
+    this.popularity = 0;
+    this.genres  = [];
   }
 
 }
