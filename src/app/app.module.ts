@@ -9,9 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { AgWordCloudModule } from 'angular4-word-cloud';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 
 // components
 import { AppComponent } from './app.component';
@@ -23,6 +23,7 @@ import { SongViewComponent } from './songview/songview.component';
 import { Top50Component } from './top50/top50.component';
 import { ArtistComponent } from './artist/artist.component';
 import { SongComponent } from './song/song.component';
+import { WordcloudComponent } from './wordcloud/wordcloud.component';
 
 // services
 import { ArtistService } from './services/artist.service';
@@ -34,6 +35,7 @@ import { IterableDictPipe } from './pipes/iterableDictPipe';
 const appRoutes: Routes = [
   {path: '', component: FrontpageComponent},
   {path: 'top50/:country', component: Top50Component},
+  {path: 'wordcloud', component: WordcloudComponent},
   {path: 'search', component: SearchComponent}
 ];
 
@@ -48,6 +50,7 @@ const appRoutes: Routes = [
     ArtistViewComponent,
     Top50Component,
     ArtistComponent,
+    WordcloudComponent,
     SongComponent
   ],
   imports: [
@@ -61,6 +64,7 @@ const appRoutes: Routes = [
     MatMenuModule,
     RouterModule.forRoot(appRoutes),
     InfiniteScrollModule,
+    AgWordCloudModule.forRoot(),
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule
